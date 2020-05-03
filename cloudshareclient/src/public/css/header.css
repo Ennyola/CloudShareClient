@@ -1,0 +1,110 @@
+.navbar-brand {
+    margin-left: 80px !important;
+}
+
+.user {
+    margin-left: 300px;
+}
+
+.header-form {
+    margin-left: 200px;
+}
+
+[ alt="logo-image"] {
+    width: 40px !important;
+    height: 40px !important;
+}
+
+[alt="userIcon"] {
+    width: 60px !important;
+    height: 60px !important;
+}
+
+
+/* Uploadbody styles */
+
+.upload-body {
+    background-color: #E5E5E5;
+    height: 19cm;
+}
+
+.navigation {
+    padding: 60px;
+    margin-left: -30px;
+}
+
+.navigation li {
+    margin-left: 60px;
+    margin-right: -30px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.navigation a {
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 25px;
+    color: #3C4A93;
+}
+
+.navigation a:hover {
+    font-size: 22px;
+    transition: 0.5s;
+    color: orange;
+}
+
+
+/* Display image styles */
+
+.files {
+    background-color: white;
+    border-radius: 20px;
+    padding: 50px;
+    overflow: auto;
+    height: 619px;
+    width: 690px;
+    margin-left: 60px;
+}
+
+.files li {
+    list-style-image: url(../images/file.png);
+    padding: 30px;
+}
+
+.file-size {
+    float: right;
+}
+
+#upload-file {
+    opacity: 0;
+}
+
+label {
+    cursor: pointer;
+}
+
+label span {
+    position: relative;
+    right: 34px
+}
+
+.upload {
+    background-color: white;
+    border-radius: 25px;
+    height: 250px;
+    width: 250px;
+    margin-left: 55px;
+    margin-top: 80px;
+}
+
+[alt="upload-image"] {
+    height: 60px !important;
+    width: 60px !important;
+}
+
+.upload form {
+    padding-left: 80px;
+    padding-top: 45px;
+}

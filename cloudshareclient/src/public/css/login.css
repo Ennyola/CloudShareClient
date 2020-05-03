@@ -1,0 +1,37 @@
+h1 {
+    color: #3C4A93;
+    font-weight: 900;
+}
+
+form {
+    margin-top: 100px;
+}
+
+img {
+    width: 776px;
+}
+
+form h4 {
+    color: #3C4A93;
+    margin-bottom: 50px;
+    font-weight: bold;
+}
+
+.email-div {
+    padding-bottom: 30px;
+}
+
+.btn-primary {
+    width: 60%;
+    background-color: #FB6B46 !important;
+}
+
+.signup-option {
+    margin-top: 50px;
+}
+
+#signup-here {
+    color: #3C4A93;
+    font-weight: 700;
+    font-style: italic;
+}
