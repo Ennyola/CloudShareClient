@@ -30,7 +30,7 @@ class Homepage extends Component{
                 <Sidebar onLogoutClick = {this.onLogoutClick.bind(this)} pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }/>
                 <div id = "page-wrap">
                     <Header username = { username } />
-                    <UploadBody/>
+                    <UploadBody username = {username}/>
                 </div>
 
 

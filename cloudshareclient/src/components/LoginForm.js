@@ -1,6 +1,6 @@
 import React, { Component} from 'react'
 import {Link } from 'react-router-dom'
-import {gql} from 'apollo-boost'
+import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
 import query from '../queries/getLoggedInUser'
 

@@ -6,6 +6,7 @@ import UploadFile from './UploadFile'
 
 
 class UploadBody extends Component{
+
     render(){
         return(
             <div className = "upload-body ">
@@ -27,10 +28,10 @@ class UploadBody extends Component{
                 </div>
                 <div className = "row">
                     <div className="col-md-6">
-                        <DisplayImages/>
+                        <DisplayImages username = {this.props.username}/>
                     </div>
                     <div className="col-md-6">
-                        <UploadFile/>
+                        <UploadFile username = {this.props.username}/>
                     </div>
                     
                 </div>
