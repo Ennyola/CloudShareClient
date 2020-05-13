@@ -16,7 +16,8 @@ class SignupForm extends Component{
     componentDidUpdate(nextProps){
         const {user} = this.props.data
         if(user){
-            this.props.history.push('/homepage')
+            const { username } = user
+            this.props.history.push(`/homepage/${username}`)
         }
     }
 

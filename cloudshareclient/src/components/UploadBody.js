@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import '../public/css/header.css'
+// import '../public/css/header.css'
 
 import DisplayImages from './DisplayImages'
-import UploadFile from './UploadFile'
+import UploadFile from './UploadFile' 
 
 
-class UploadBody extends Component{
+const UploadBody= (props)=>{        
 
-    render(){
         return(
             <div className = "upload-body ">
+            
                 <div className="navigation">
                     <ul className="nav">
                         <li className="nav-item ">
@@ -26,13 +26,8 @@ class UploadBody extends Component{
                         </li>
                     </ul>
                 </div>
-                <div className = "row">
-                    <div className="col-md-6">
-                        <DisplayImages username = {this.props.username}/>
-                    </div>
-                    <div className="col-md-6">
-                        <UploadFile username = {this.props.username}/>
-                    </div>
+                
+                <DisplayImages username = {props.username} />
                     
                 </div>
 
@@ -40,9 +35,10 @@ class UploadBody extends Component{
 
 
                 
-            </div>
+        
         )
     }
-}
+
+
 
 export default UploadBody

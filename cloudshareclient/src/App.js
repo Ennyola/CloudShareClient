@@ -1,7 +1,7 @@
 import React from 'react';
 import {ApolloClient} from 'apollo-client'
 import { ApolloProvider } from 'react-apollo'
-import { Route, HashRouter,} from 'react-router-dom'
+import { Route, BrowserRouter, Redirect, Switch} from 'react-router-dom'
 import { createHttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { setContext } from 'apollo-link-context'
@@ -12,6 +12,9 @@ import { setContext } from 'apollo-link-context'
 import LoginForm from './components/LoginForm'
 import SignupForm from './components/SignupForm'
 import Homepage from './components/Homepage'
+import VideosPage from './components/Videos'
+import AudiosPage from './components/Audios'
+import RawFiles from './components/RawFiles'
 
 
 const link = createHttpLink({
@@ -44,14 +47,17 @@ function App() {
   return (
     
     <ApolloProvider client = { client }>
-      <HashRouter>
-        <Route path = "/login" component = {LoginForm} />
-        <Route path = "/signup" component = {SignupForm} />
-        <Route path = "/homepage/:username" component = {Homepage} >
-          {/* <Route path = "/homepage/:username/all-documents"/> */}
-        </Route>
-        
-      </HashRouter>
+      
+      <BrowserRouter>
+           {/* <Redirect from="/" exact to="/homepage/:username" />  */}
+          <Route path = "/login" exact  component = {LoginForm} />
+          <Route path = "/signup" exact  component = {SignupForm} />
+          <Route path = "/homepage/:username" exact  component = {Homepage} />
+          <Route path = "/homepage/:username/images" exact  component = {Homepage} />
+          <Route path = "/homepage/:username/videos" exact  component = {VideosPage}/>
+          <Route path = "/homepage/:username/audios" exact  component = {AudiosPage}/>
+          <Route path = "/homepage/:username/documents" exact  component = {RawFiles}/>
+      </BrowserRouter>
 
       
     </ApolloProvider>
