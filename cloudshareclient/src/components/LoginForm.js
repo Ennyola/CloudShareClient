@@ -21,6 +21,7 @@ class LoginForm extends Component{
         const {user} = this.props.data
         if(user){
             const { username } = user
+            localStorage.setItem('username', username)
             this.props.history.push(`/homepage/${username}`)
         }
     }
@@ -30,7 +31,7 @@ class LoginForm extends Component{
         event.preventDefault();
 
         const _saveUserData = (token) => {
-            localStorage.setItem('user-token', token)
+            localStorage.setItem('token', token)
         }
 
         this.props.mutate({

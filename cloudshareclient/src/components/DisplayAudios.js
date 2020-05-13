@@ -16,6 +16,9 @@ import uploadImage from '../public/images/upload.png'
 
 
 const DisplayAudiosPage = () => {
+
+    const user = localStorage.getItem('username')
+
     //upload Audio mutation
     const [uploadAudio] = useMutation(uploadFileMutation, {
         client
@@ -37,10 +40,10 @@ const DisplayAudiosPage = () => {
      const onSubmit=(e)=>{
         e.preventDefault();
         uploadAudio({ 
-            variables: { file: audio, username: "Ennyola" },
+            variables: { file: audio, username: user },
             refetchQueries:[{ 
                query : getAudioQuery,
-                variables : { username : "Ennyola" }
+                variables : { username : user }
             
             }]
         })
@@ -52,14 +55,14 @@ const DisplayAudiosPage = () => {
                 variables:{url},
                 refetchQueries : [{
                     query : getAudioQuery,
-                    variables : {username: 'Ennyola'}
+                    variables : {username: user}
                 }],
             })
         }
      
 
     const {data, loading, error} = useQuery(getAudioQuery, {
-        variables : {username : "Ennyola"}, client
+        variables : {username : user}, client
     })
     if (loading) return( <div> Loading... </div>)
 

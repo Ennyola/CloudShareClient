@@ -17,6 +17,7 @@ class SignupForm extends Component{
         const {user} = this.props.data
         if(user){
             const { username } = user
+            localStorage.setItem('username', username)
             this.props.history.push(`/homepage/${username}`)
         }
     }
@@ -33,7 +34,7 @@ class SignupForm extends Component{
         }).then((data)=>{
             this.props.data.refetch()
             const{ token } = data.data.createUser.tokenAuth
-            localStorage.setItem('user-token', token)
+            localStorage.setItem('token', token)
         })
     }
 

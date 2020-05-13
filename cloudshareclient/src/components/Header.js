@@ -8,7 +8,7 @@ import '../public/css/header.css'
 
 class Header extends Component{
     render(){
-      const { username } = this.props
+      const username = localStorage.getItem('username')
         return(
             <div className = "header">
                 <nav className = "navbar  navbar-expand">

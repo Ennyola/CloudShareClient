@@ -11,9 +11,10 @@ import deleteRawFileMutation from '../mutations/deleteRawFileMutation'
 import uploadImage from '../public/images/upload.png'
 
 const DisplayRawFiles = (props)=>{
+    const user = localStorage.getItem('username')
     // get all documents
     const { data, loading, error } = useQuery(query,{
-        variables :{username : "Ennyola"},
+        variables :{username : user},
         client
     })
 
@@ -37,7 +38,7 @@ const DisplayRawFiles = (props)=>{
             variables:{url},
             refetchQueries : [{
                 query,
-                variables : {username: 'Ennyola'}
+                variables : {username: user}
             }],
         })
     }
@@ -75,15 +76,15 @@ const DisplayRawFiles = (props)=>{
                 </div>
             </div>
             <div className="col-md-6">
-                {/* <UploadFile username = {'Ennyola'} query = {getVideosQuery}/> */}
+                {/* <UploadFile username = {user} query = {getVideosQuery}/> */}
                 <div class="upload">
                     <form onSubmit = {(e)=>{
                         e.preventDefault();
                         mutate({ 
-                         variables: { file, username: "Ennyola" },
+                         variables: { file, username: user },
                         refetchQueries:[{ 
                         query,
-                            variables : { username : 'Ennyola' }
+                            variables : { username : user }
                         
                         }]
                     })     

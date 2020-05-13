@@ -7,6 +7,12 @@ import star from '../public/images/star.png'
 class Sidebar extends Component{
 
     // disableCloseOnEs
+    onLogoutClick(){
+      localStorage.clear()
+      //pure javascript function to reload a page
+      window.location.reload(true);
+      
+  }
 
     render(){
         return(
@@ -16,7 +22,7 @@ class Sidebar extends Component{
              
              {/* <a> <img src={bin} alt="bin"/></a> */}
 
-             <button onClick = {this.props.onLogoutClick} name = "logout"  className = " btn btn-primary">logout</button>
+             <button onClick = {this.onLogoutClick.bind(this)} name = "logout"  className = " btn btn-primary">logout</button>
           
            </Menu>
         )

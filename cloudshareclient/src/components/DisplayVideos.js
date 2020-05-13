@@ -17,9 +17,11 @@ import uploadImage from '../public/images/upload.png'
 
 
 const DisplayVideos = ()=>{
+
+            const user = localStorage.getItem('username')
             // to get the list of videos from the db
             const {data, loading} = useQuery(getVideosQuery, {
-                variables : {username : "Ennyola"}, client
+                variables : {username : user}, client
             })
 
             const [mutate] = useMutation(uploadFileMutation,{
@@ -38,10 +40,10 @@ const DisplayVideos = ()=>{
             //  const onSubmit=(e)=>{
             //     e.preventDefault();
             //     mutate({ 
-            //         variables: { file: image, username: "Ennyola" },
+            //         variables: { file: image, username: user },
             //         refetchQueries:[{ 
             //            query : getVideosQuery,
-            //             variables : { username : 'Ennyola' }
+            //             variables : { username : user }
                     
             //         }]
             //     })
@@ -53,7 +55,7 @@ const DisplayVideos = ()=>{
                         variables:{url},
                         refetchQueries : [{
                             query : getVideosQuery,
-                            variables : {username: 'Ennyola'}
+                            variables : {username: user}
                         }],
                     })
                 }
@@ -95,10 +97,10 @@ const DisplayVideos = ()=>{
                         <form onSubmit = {(e)=>{
                             e.preventDefault();
                             mutate({ 
-                            variables: { file: video, username: "Ennyola" },
+                            variables: { file: video, username: user },
                             refetchQueries:[{ 
                             query : getVideosQuery,
-                                variables : { username : 'Ennyola' }
+                                variables : { username : user }
                             
                             }]
                         })     

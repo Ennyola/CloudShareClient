@@ -15,6 +15,7 @@ import Homepage from './components/Homepage'
 import VideosPage from './components/Videos'
 import AudiosPage from './components/Audios'
 import RawFiles from './components/RawFiles'
+import requireAuth from './components/requireAuth'
 
 
 const link = createHttpLink({
@@ -23,7 +24,7 @@ const link = createHttpLink({
 
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
-  const token = localStorage.getItem('user-token');
+  const token = localStorage.getItem('token');
   // return the headers to the context so httpLink can read them
   return {
     headers: {
@@ -52,11 +53,11 @@ function App() {
            {/* <Redirect from="/" exact to="/homepage/:username" />  */}
           <Route path = "/login" exact  component = {LoginForm} />
           <Route path = "/signup" exact  component = {SignupForm} />
-          <Route path = "/homepage/:username" exact  component = {Homepage} />
-          <Route path = "/homepage/:username/images" exact  component = {Homepage} />
-          <Route path = "/homepage/:username/videos" exact  component = {VideosPage}/>
-          <Route path = "/homepage/:username/audios" exact  component = {AudiosPage}/>
-          <Route path = "/homepage/:username/documents" exact  component = {RawFiles}/>
+          <Route path = "/homepage/:username" exact  component = { requireAuth(Homepage)  } />
+          <Route path = "/homepage/:username/images" exact  component = {requireAuth(Homepage)} />
+          <Route path = "/homepage/:username/videos" exact  component = {requireAuth(VideosPage)}/>
+          <Route path = "/homepage/:username/audios" exact  component = {requireAuth(AudiosPage)}/>
+          <Route path = "/homepage/:username/documents" exact  component = {requireAuth(RawFiles)}/>
       </BrowserRouter>
 
       

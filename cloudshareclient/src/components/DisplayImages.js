@@ -14,9 +14,12 @@ import '../public/css/header.css'
 import  gql  from 'graphql-tag';
 
 const  DisplayImages = (props)=>{
+
+            const user = localStorage.getItem("username")
+
             //fetch all images if available
              const {loading, data, error, refetch} = useQuery(getImage,{
-                variables : {username: "Ennyola"}, client
+                variables : {username: user}, client
             }); 
 
             // delete image mutation
@@ -41,7 +44,7 @@ const  DisplayImages = (props)=>{
                     variables:{url},
                     refetchQueries : [{
                         query : getImage,
-                        variables : {username: "Ennyola"}
+                        variables : {username: user}
                     }],
                 })
             }
@@ -79,9 +82,9 @@ const  DisplayImages = (props)=>{
                         <div className="upload">
                             <form onSubmit = {(e)=>{
                                 e.preventDefault();
-                                mutate({ variables: { file: image, username: "Ennyola" },refetchQueries : [{
+                                mutate({ variables: { file: image, username: user },refetchQueries : [{
                             query : getImage,
-                            variables : {username: "Ennyola"}
+                            variables : {username: user}
                                     }],
                                 });
                             }}>
