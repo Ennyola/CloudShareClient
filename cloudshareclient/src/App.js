@@ -1,7 +1,8 @@
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import React from 'react';
 import {ApolloClient} from 'apollo-client'
 import { ApolloProvider } from 'react-apollo'
-import { Route, BrowserRouter, Redirect, Switch} from 'react-router-dom'
+import { Route, BrowserRouter} from 'react-router-dom'
 import { createHttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { setContext } from 'apollo-link-context'
@@ -37,8 +38,6 @@ const authLink = setContext((_, { headers }) => {
 
 const client = new ApolloClient({
 
-  dataIdFromObject:  o => o.id,
-
   link: authLink.concat(link),
   cache: new InMemoryCache(),
 })
@@ -50,7 +49,6 @@ function App() {
     <ApolloProvider client = { client }>
       
       <BrowserRouter>
-           {/* <Redirect from="/" exact to="/homepage/:username" />  */}
           <Route path = "/login" exact  component = {LoginForm} />
           <Route path = "/signup" exact  component = {SignupForm} />
           <Route path = "/homepage/:username" exact  component = { requireAuth(Homepage)  } />

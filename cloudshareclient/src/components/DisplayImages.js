@@ -1,9 +1,12 @@
-import React, { Component, useState } from 'react'
+import React, {useState } from 'react'
 import ApolloClient from "apollo-client";
-import { InMemoryCache, defaultDataIdFromObject} from 'apollo-cache-inmemory';
-import { createHttpLink } from 'apollo-link-http'
+import { InMemoryCache} from 'apollo-cache-inmemory';
 import {useQuery, useMutation} from '@apollo/react-hooks'
 import { createUploadLink } from 'apollo-upload-client'
+import { saveAs } from 'file-saver';
+import {WhatsappShareButton, TwitterShareButton, WhatsappIcon, TwitterIcon} from 'react-share'
+import Loader from 'react-loader-spinner'
+
 
 import getImage from '../queries/getImage'
 import uploadFileMutation from '../mutations/uploadFileMutation'
@@ -15,22 +18,26 @@ import  gql  from 'graphql-tag';
 
 const  DisplayImages = (props)=>{
 
+            
+
             const user = localStorage.getItem("username")
 
             //fetch all images if available
-             const {loading, data, error, refetch} = useQuery(getImage,{
+             const {loading : queryLoading, data, error:queryError} = useQuery(getImage,{
                 variables : {username: user}, client
             }); 
 
             // delete image mutation
-            const [ deleteImageMutation] = useMutation(deleteMutation, {
+            const [ deleteImageMutation, ] = useMutation(deleteMutation, {
                 client
             });
 
             //upload mutation
-            const [mutate] = useMutation(uploadFileMutation,{
+            const [mutate, {loading: uploadMutationLoading, error: uploadMutationError}] = useMutation(uploadFileMutation,{
                 client
             })
+
+
             const [image, setImage] = useState(null)
 
             function onChange({    target: {   validity,files: [file],},}) {
@@ -48,19 +55,30 @@ const  DisplayImages = (props)=>{
                     }],
                 })
             }
+            const download=(url, id)=>{
+                saveAs(url, id)
 
-            if (loading) return <div>Loading...</div> 
-            if (error) return `error ${error}` 
+            }
+
+            if (queryLoading) return (<div> <Loader type="TailSpin" color="#00BFFF" height={80} width={80} /></div> )
+            if (queryError) return (<div> <h4> Error :(  ...There seems to be an error getting your Files. Please reload </h4> </div>)
             const  {getfiles} = data
-            
             
             const displayImages = ()=>{
                 if (getfiles){ 
                     return getfiles.map(({id, url, size})=>{
                         return(
                             <li key = {id}>
-                                <a href={url} target="_blank" rel="noopener noreferrer"> {id} </a>
-                                <i className="fas fa-trash"  onClick ={()=> {onClick(url)}}></i>  
+                                <a href={url} target="_blank" rel="noopener noreferrer" download > {id} </a>
+                                  <i className="fas fa-download" onClick ={()=> {download(url, id)}}></i>
+                                <WhatsappShareButton url = {url}>
+                                    <WhatsappIcon size={32} round={true}/>
+                                </WhatsappShareButton>
+                                <TwitterShareButton url = {url} title= {"Check out this link"} via={"CloudShare"} hashtags = {["cloudshare"]}>
+                                    <TwitterIcon size={32} round={true}/>
+                                </TwitterShareButton>
+                                <i className="fas fa-trash"  onClick ={()=> {onClick(url)}}></i>
+                        
                                 <span className="file-size">{size}</span>
                                 <hr/>   
                             </li>
@@ -79,6 +97,7 @@ const  DisplayImages = (props)=>{
                         </div>
                     </div>
                     <div className="col-md-6">
+                        {uploadMutationLoading && <Loader type="ThreeDots" color="#00BFFF" height={12} width={80} />}
                         <div className="upload">
                             <form onSubmit = {(e)=>{
                                 e.preventDefault();
@@ -98,6 +117,8 @@ const  DisplayImages = (props)=>{
                                 type="file"  id="upload-file"/><br/>
                                 <button type = "submit"> Submit </button>
                             </form>
+                            
+                            {uploadMutationError && <p>Error :( Please try again</p>}
                             
                         </div>
                     </div>

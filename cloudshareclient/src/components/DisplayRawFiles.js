@@ -1,9 +1,11 @@
 import React, {useState} from 'react'
 import {useQuery, useMutation} from '@apollo/react-hooks'
 import ApolloClient from "apollo-client";
-import { InMemoryCache, defaultDataIdFromObject} from 'apollo-cache-inmemory';
+import { InMemoryCache} from 'apollo-cache-inmemory';
 import { createUploadLink } from 'apollo-upload-client'
-
+import { saveAs } from 'file-saver';
+import {WhatsappShareButton, TwitterShareButton, WhatsappIcon, TwitterIcon} from 'react-share'
+import Loader from 'react-loader-spinner'
 
 import query from '../queries/getRawFile'
 import uploadFileMutation from '../mutations/uploadFileMutation'
@@ -13,13 +15,13 @@ import uploadImage from '../public/images/upload.png'
 const DisplayRawFiles = (props)=>{
     const user = localStorage.getItem('username')
     // get all documents
-    const { data, loading, error } = useQuery(query,{
+    const {loading : queryLoading, data, error:queryError } = useQuery(query,{
         variables :{username : user},
         client
     })
 
     // send file to graphQl endpoint
-    const [mutate] = useMutation(uploadFileMutation,{
+    const [mutate, {loading: uploadMutationLoading, error: uploadMutationError}] = useMutation(uploadFileMutation,{
         client
     })
     const [file, setFile] = useState(null)
@@ -42,10 +44,14 @@ const DisplayRawFiles = (props)=>{
             }],
         })
     }
+    const download=(url, id)=>{
+        saveAs(url, id)
+
+    }
 
     
-     if (loading) return( <div>Loading...</div> )
-     if (error) return(<div> Error fetching files</div>)
+    if (queryLoading) return (<div> <Loader type="TailSpin" color="#00BFFF" height={80} width={80} /></div> )
+    if (queryError) return (<div> <h4> Error :(  ...There seems to be an error getting your Files. Please reload </h4> </div>)
 
     const {getRawFiles} = data
 
@@ -55,7 +61,15 @@ const DisplayRawFiles = (props)=>{
                 return(
                     <li key = {id}>
                         <a href={url} target="_blank" rel="noopener noreferrer"> {id} </a>
-                         <i className="fas fa-trash"  onClick ={()=> {onClick(url)}}></i>   
+                        <i className="fas fa-download" onClick ={()=> {download(url, id)}}></i> 
+                         <WhatsappShareButton url = {url}>
+                             <WhatsappIcon size={32} round={true}/>
+                        </WhatsappShareButton>
+                        <TwitterShareButton url = {url} title= {"Check out this link"} via={"CloudShare"} hashtags = {["cloudshare"]}>
+                            <TwitterIcon size={32} round={true}/>
+                        </TwitterShareButton>
+                        <i className="fas fa-trash"  onClick ={()=> {onClick(url)}}></i>
+
                         <span className="file-size">{size}</span>
                         <hr/>   
                     </li>
@@ -76,7 +90,7 @@ const DisplayRawFiles = (props)=>{
                 </div>
             </div>
             <div className="col-md-6">
-                {/* <UploadFile username = {user} query = {getVideosQuery}/> */}
+                {uploadMutationLoading && <Loader type="ThreeDots" color="#00BFFF" height={12} width={80} />}
                 <div class="upload">
                     <form onSubmit = {(e)=>{
                         e.preventDefault();
@@ -99,6 +113,7 @@ const DisplayRawFiles = (props)=>{
                         type="file"  id="upload-file" required/><br/>
                         <button type = "submit"> Submit </button>
                     </form>
+                    {uploadMutationError && <p>Error :( Please try again</p>}
                 </div>
             </div>
 

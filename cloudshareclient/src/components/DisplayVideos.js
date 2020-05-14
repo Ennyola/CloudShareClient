@@ -1,17 +1,14 @@
 import React, {useState} from 'react'
 import {useQuery, useMutation} from '@apollo/react-hooks'
 import ApolloClient from "apollo-client";
-import { InMemoryCache, defaultDataIdFromObject} from 'apollo-cache-inmemory';
+import { InMemoryCache} from 'apollo-cache-inmemory';
 import { createUploadLink } from 'apollo-upload-client'
-import gql from 'graphql-tag'
-
+import { saveAs } from 'file-saver';
+import {WhatsappShareButton, TwitterShareButton, WhatsappIcon, TwitterIcon} from 'react-share'
+import Loader from 'react-loader-spinner'
 
 import deleteVideoMutation from '../mutations/deleteVideoMutation'
  import uploadFileMutation from '../mutations/uploadFileMutation'
-import Header from './Header'
-import Sidebar from './Sidebar'
-import PageLinks from './PageLinks'
-import UploadFile from './UploadFile'
 import getVideosQuery from '../queries/getVideos'
 import uploadImage from '../public/images/upload.png'
 
@@ -20,11 +17,11 @@ const DisplayVideos = ()=>{
 
             const user = localStorage.getItem('username')
             // to get the list of videos from the db
-            const {data, loading} = useQuery(getVideosQuery, {
+            const {loading : queryLoading, data, error:queryError} = useQuery(getVideosQuery, {
                 variables : {username : user}, client
             })
 
-            const [mutate] = useMutation(uploadFileMutation,{
+            const [mutate, {loading: uploadMutationLoading, error: uploadMutationError}] = useMutation(uploadFileMutation,{
                 client
             })
             const [ deleteMutation] = useMutation(deleteVideoMutation, {
@@ -59,12 +56,17 @@ const DisplayVideos = ()=>{
                         }],
                     })
                 }
+                const download=(url, id)=>{
+                    saveAs(url, id)
+    
+                }
              
 
 
    
 
-    if (loading) return(  <div>Loading...</div>    )
+    if (queryLoading) return (<div> <Loader type="TailSpin" color="#00BFFF" height={80} width={80} /></div> )
+    if (queryError) return (<div> <h4> Error :(  ...There seems to be an error getting your Files. Please reload </h4></div>)
 
     const {queryVideos} = data
             
@@ -74,6 +76,14 @@ const DisplayVideos = ()=>{
                         return(
                             <li key = {id}>
                                 <a href={url} target="_blank" rel="noopener noreferrer"> {id} </a>
+                                
+                                <i className="fas fa-download" onClick ={()=> {download(url, id)}}></i>
+                                <WhatsappShareButton url = {url}>
+                                    <WhatsappIcon size={32} round={true}/>
+                                </WhatsappShareButton>
+                                <TwitterShareButton url = {url} title= {"Check out this link"} via={"CloudShare"} hashtags = {["cloudshare"]}>
+                                    <TwitterIcon size={32} round={true}/>
+                                </TwitterShareButton>
                                 <i className="fas fa-trash"  onClick ={()=> {onClick(url)}}></i>  
                                 <span className="file-size">{size}</span>
                                 <hr/>   
@@ -92,8 +102,9 @@ const DisplayVideos = ()=>{
                         </ul>
                     </div>
                 </div>
-                <div className="col-md-6">
-                    <div class="upload">
+                <div className="col-md-4">
+                    {uploadMutationLoading && <Loader type="ThreeDots" color="#00BFFF" height={12} width={80} />}
+                    <div className="upload">
                         <form onSubmit = {(e)=>{
                             e.preventDefault();
                             mutate({ 
@@ -115,6 +126,7 @@ const DisplayVideos = ()=>{
                             type="file"  id="upload-file" required/><br/>
                             <button type = "submit"> Submit </button>
                         </form>
+                        {uploadMutationError && <p>Error :( Please try again</p>}
                     </div>
                 </div>
 

@@ -1,16 +1,14 @@
 import React, { useState } from 'react'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import ApolloClient from "apollo-client";
-import { InMemoryCache, defaultDataIdFromObject } from 'apollo-cache-inmemory';
+import { InMemoryCache} from 'apollo-cache-inmemory';
 import { createUploadLink } from 'apollo-upload-client'
-
+import { saveAs } from 'file-saver';
+import {WhatsappShareButton, TwitterShareButton, WhatsappIcon, TwitterIcon} from 'react-share'
+import Loader from 'react-loader-spinner'
 
 import deleteAudioMutation from '../mutations/deleteAudioMutation'
 import uploadFileMutation from '../mutations/uploadFileMutation'
-import Header from './Header'
-import Sidebar from './Sidebar'
-import PageLinks from './PageLinks'
-import UploadFile from './UploadFile'
 import getAudioQuery from '../queries/getAudio'
 import uploadImage from '../public/images/upload.png'
 
@@ -19,8 +17,12 @@ const DisplayAudiosPage = () => {
 
     const user = localStorage.getItem('username')
 
+    const {loading : queryLoading, data, error:queryError} = useQuery(getAudioQuery, {
+        variables : {username : user}, client
+    })
+
     //upload Audio mutation
-    const [uploadAudio] = useMutation(uploadFileMutation, {
+    const [uploadAudio, {loading: uploadMutationLoading, error: uploadMutationError}] = useMutation(uploadFileMutation, {
         client
     })
     const [ deleteMutation] = useMutation(deleteAudioMutation, {
@@ -59,12 +61,15 @@ const DisplayAudiosPage = () => {
                 }],
             })
         }
+        const download=(url, id)=>{
+            saveAs(url, id)
+
+        }
      
 
-    const {data, loading, error} = useQuery(getAudioQuery, {
-        variables : {username : user}, client
-    })
-    if (loading) return( <div> Loading... </div>)
+    
+        if (queryLoading) return (<div> <Loader type="TailSpin" color="#00BFFF" height={80} width={80} /></div> )
+        if (queryError) return (<div> <h4> Error :(  ...There seems to be an error getting your Files. Please reload </h4> </div>)
 
     const { queryMusic} = data
 
@@ -74,7 +79,14 @@ const DisplayAudiosPage = () => {
                 return(
                     <li key = {id}>
                         <a href={url} target="_blank" rel="noopener noreferrer"> {id} </a>
-                        <i className="fas fa-trash"  onClick ={()=> {onClick(url)}}></i>  
+                        <i className="fas fa-download" onClick ={()=> {download(url, id)}}></i>
+                        <WhatsappShareButton url = {url}>
+                             <WhatsappIcon size={32} round={true}/>
+                        </WhatsappShareButton>
+                        <TwitterShareButton url = {url} title= {"Check out this link"} via={"CloudShare"} hashtags = {["cloudshare"]}>
+                            <TwitterIcon size={32} round={true}/>
+                        </TwitterShareButton>
+                        <i className="fas fa-trash"  onClick ={()=> {onClick(url)}}></i> 
                         <span className="file-size">{size}</span>
                         <hr/>   
                     </li>
@@ -95,6 +107,7 @@ const DisplayAudiosPage = () => {
                     </div>
                 </div>
                 <div className="col-md-6">
+                    {uploadMutationLoading && <Loader type="ThreeDots" color="#00BFFF" height={12} width={80} />}
                     <div class="upload">
                         <form onSubmit = {onSubmit} >
                             <label htmlFor="upload-file"> 
@@ -107,6 +120,7 @@ const DisplayAudiosPage = () => {
                             type="file"  id="upload-file" required/><br/>
                             <button type = "submit"> Submit </button>
                         </form>
+                        {uploadMutationError && <p>Error :( Please try again</p>}
                     </div>
                  </div>
 
