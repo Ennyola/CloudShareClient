@@ -28,6 +28,14 @@ const DisplayRawFiles = (props)=>{
     function onChange({    target: {   validity,files: [file],},}) {
         if (validity.valid){
             setFile(file)
+            mutate({ 
+                variables: { file, username: user },
+               refetchQueries:[{ 
+               query,
+                   variables : { username : user }
+               
+               }]
+           }) 
         } 
      }
      //Delete file mutation
@@ -81,28 +89,22 @@ const DisplayRawFiles = (props)=>{
 
     
     return(
+        <div>
+         <input id = "first-input" type="file" onChange = {onChange}/>
         <div className = "row">
-            <div className="col-md-6">
+            <div className="col-md-8">
                 <div className = "files">
                     <ul>
                         {displayRawFiles()}      
                     </ul>
                 </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-4">
                 {uploadMutationLoading && <Loader type="ThreeDots" color="#00BFFF" height={12} width={80} />}
                 <div class="upload">
-                    <form onSubmit = {(e)=>{
-                        e.preventDefault();
-                        mutate({ 
-                         variables: { file, username: user },
-                        refetchQueries:[{ 
-                        query,
-                            variables : { username : user }
-                        
-                        }]
-                    })     
-                    }}>
+                    
+                            
+                      <span>
                         <label htmlFor="upload-file"> 
                             <img src={uploadImage} alt="upload-image"/><br/>
                             <span> Click to upload a File </span>
@@ -110,13 +112,13 @@ const DisplayRawFiles = (props)=>{
                         
                         <input
                         onChange = {onChange}
-                        type="file"  id="upload-file" required/><br/>
-                        <button type = "submit"> Submit </button>
-                    </form>
+                        type="file"  id="upload-file"/><br/>
+                       </span>
+                       
                     {uploadMutationError && <p>Error :( Please try again</p>}
                 </div>
             </div>
-
+            </div>
         </div>
     )
 }

@@ -44,7 +44,7 @@
 
 .upload-body {
     background-color: #E5E5E5;
-    height: 25cm;
+    height: 30cm;
 }
 
 .navigation {
@@ -84,7 +84,12 @@
     overflow: scroll;
     height: 619px;
     width: 100%;
-    margin-left: 60px;
+    margin-left: 30px;
+}
+
+.col-md-8,
+.col-md-4 {
+    position: unset;
 }
 
 .files li {
@@ -113,9 +118,9 @@ label span {
     background-color: white;
     border-radius: 25px;
     height: 250px;
-    width: 250px;
-    margin-left: 55px;
+    width: 60%;
     margin-top: 80px;
+    margin-left: 15px;
 }
 
 [alt="upload-image"] {
@@ -123,7 +128,83 @@ label span {
     width: 60px !important;
 }
 
+.upload label {
+    padding-left: 40%;
+    padding-top: 55px;
+}
+
+.upload label span {
+    font-weight: 750;
+    font-size: 18px;
+    line-height: 25px;
+    color: #3C4A93;
+    margin-right: 5%;
+}
+
 .upload form {
     padding-left: 80px;
     padding-top: 45px;
+}
+
+#first-input {
+    color: transparent;
+    margin-left: 55%;
+    margin-bottom: 50px;
+    display: none;
+    outline: none;
+}
+
+#first-input::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
+#first-input::before {
+    content: 'Upload file';
+    display: inline-block;
+    background: linear-gradient(#7b4397, #dc2430);
+    border: 1px solid #999;
+    border-radius: 20px;
+    width: 150px;
+    padding: 10px;
+    padding-left: 2rem;
+    outline: none;
+    -webkit-user-select: none;
+    cursor: pointer;
+    text-shadow: 1px 1px #fff;
+}
+
+@media(max-width: 1000px) {
+    #first-input {
+        display: block;
+    }
+    .upload {
+        display: none;
+    }
+}
+
+@media (min-width: 766px) and (max-width: 1000px) {
+    #first-input {
+        display: block;
+    }
+    .upload {
+        display: none;
+    }
+    .files {
+        margin-left: 90px;
+        width: 110%;
+    }
+}
+
+@media (min-width: 562px) and (max-width: 765px) {
+    .files {
+        margin-left: 25px;
+        width: 85%;
+    }
+}
+
+@media(max-width: 561px) {
+    .files {
+        margin-left: 15px;
+        width: 90%;
+    }
 }

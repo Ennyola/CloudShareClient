@@ -38,11 +38,16 @@ const  DisplayImages = (props)=>{
             })
 
 
-            const [image, setImage] = useState(null)
+            const [image, setImage] = useState()
 
             function onChange({    target: {   validity,files: [file],},}) {
                 if (validity.valid){
                     setImage(file)
+                    mutate({ variables: { file, username: user },refetchQueries : [{
+                        query : getImage,
+                        variables : {username: user}
+                                }],
+                    });
                 } 
              }
 
@@ -88,41 +93,37 @@ const  DisplayImages = (props)=>{
                 };
                         
             return(
+                <div>
+                <input id = "first-input" type="file" onChange = {onChange}/>
                 <div className="row">
-                    <div className="col-md-6">
+                    <div className="col-md-8">
                         <div className = "files">
                             <ul>
                                 {displayImages()}     
                             </ul>
                         </div>
                     </div>
-                    <div className="col-md-6">
-                        {uploadMutationLoading && <Loader type="ThreeDots" color="#00BFFF" height={12} width={80} />}
+                    <div className="col-md-4">
+                        
                         <div className="upload">
-                            <form onSubmit = {(e)=>{
-                                e.preventDefault();
-                                mutate({ variables: { file: image, username: user },refetchQueries : [{
-                            query : getImage,
-                            variables : {username: user}
-                                    }],
-                                });
-                            }}>
-                                <label htmlFor="upload-file"> 
-                                    <img src={uploadImage} alt="upload-image"/><br/>
-                                    <span> Click to upload a File </span>
-                                </label>
-                                
-                                <input
-                                onChange = {onChange}
-                                type="file"  id="upload-file"/><br/>
-                                <button type = "submit"> Submit </button>
-                            </form>
+                                {uploadMutationLoading && <Loader type="ThreeDots" color="#00BFFF" height={12} width={80} />}
+                                <span>
+                                    <label htmlFor="upload-file"> 
+                                        <img src={uploadImage} alt="upload-image"/><br/>
+                                        <span> Click to upload a File </span>
+                                    </label>
+                                    <input
+                                    onChange = {onChange}
+                                    type="file"  id="upload-file"/>
+                                </span>
+
                             
                             {uploadMutationError && <p>Error :( Please try again</p>}
                             
                         </div>
                     </div>
                     
+                </div>
                 </div>
              )
             
