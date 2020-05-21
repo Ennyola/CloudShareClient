@@ -51,7 +51,7 @@ function App() {
       <BrowserRouter>
           <Route path = "/login" exact  component = {LoginForm} />
           <Route path = "/signup" exact  component = {SignupForm} />
-          <Route path = "/homepage/:username" exact  component = { requireAuth(Homepage)  } />
+          <Route path = "/homepage/:username" exact  component = {requireAuth(Homepage)} />
           <Route path = "/homepage/:username/images" exact  component = {requireAuth(Homepage)} />
           <Route path = "/homepage/:username/videos" exact  component = {requireAuth(VideosPage)}/>
           <Route path = "/homepage/:username/audios" exact  component = {requireAuth(AudiosPage)}/>

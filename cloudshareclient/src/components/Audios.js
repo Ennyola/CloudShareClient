@@ -16,8 +16,9 @@ class Audios extends Component{
                 <div id = "page-wrap">
                     <Header/>
                     <div className = "upload-body ">
-                        <PageLinks/>
-                        <DisplaAudios/>
+                        {/* <PageLinks/> */}
+                            <DisplaAudios/>
+                        
                     </div>
                 </div>
             </div>

@@ -16,7 +16,7 @@ class RawFiles extends Component{
                 <div id = "page-wrap">
                     <Header/>
                     <div className = "upload-body ">
-                        <PageLinks/>
+                        {/* <PageLinks/> */}
                         <DisplayRawFiles/>
                     </div>
                 </div>

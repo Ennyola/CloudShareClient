@@ -44,13 +44,15 @@ const DisplayRawFiles = (props)=>{
     });
 
     const onClick =(url)=>{
-        deleteMutation({
-            variables:{url},
-            refetchQueries : [{
-                query,
-                variables : {username: user}
-            }],
-        })
+        if(window.confirm('Are you sure you want to delete this file')){
+            deleteMutation({
+                variables:{url},
+                refetchQueries : [{
+                    query,
+                    variables : {username: user}
+                }],
+            })
+        }
     }
     const download=(url, id)=>{
         saveAs(url, id)
@@ -58,8 +60,8 @@ const DisplayRawFiles = (props)=>{
     }
 
     
-    if (queryLoading) return (<div> <Loader type="TailSpin" color="#00BFFF" height={80} width={80} /></div> )
-    if (queryError) return (<div> <h4> Error :(  ...There seems to be an error getting your Files. Please reload </h4> </div>)
+    if (queryLoading) return (<div className = "load-position"> <Loader type="TailSpin" color="#3C4A93" height={80} width={80} /></div> )
+    if (queryError) return (<div className = "fetch-error"> <h4> Error :(  ...There seems to be an error getting your Files. Please reload </h4> </div>)
 
     const {getRawFiles} = data
 
@@ -89,7 +91,7 @@ const DisplayRawFiles = (props)=>{
 
     
     return(
-        <div>
+        <div className = "container">
          <input id = "first-input" type="file" onChange = {onChange}/>
         <div className = "row">
             <div className="col-md-8">

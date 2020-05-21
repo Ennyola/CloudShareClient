@@ -49,6 +49,7 @@ const DisplayAudiosPage = () => {
 
      
         const onClick=(url)=>{
+            if(window.confirm('Are you sure you want to delete this file')){
             deleteMutation({
                 variables:{url},
                 refetchQueries : [{
@@ -57,6 +58,7 @@ const DisplayAudiosPage = () => {
                 }],
             })
         }
+        }
         const download=(url, id)=>{
             saveAs(url, id)
 
@@ -64,8 +66,8 @@ const DisplayAudiosPage = () => {
      
 
     
-        if (queryLoading) return (<div> <Loader type="TailSpin" color="#00BFFF" height={80} width={80} /></div> )
-        if (queryError) return (<div> <h4> Error :(  ...There seems to be an error getting your Files. Please reload </h4> </div>)
+        if (queryLoading) return (<div className = "load-position"> <Loader type="TailSpin" color="#3C4A93" height={80} width={80} /></div> )
+        if (queryError) return (<div className = "fetch-error"> <h4> Error :(  ...There seems to be an error getting your Files. Please reload </h4> </div>)
 
     const { queryMusic} = data
 
@@ -93,7 +95,7 @@ const DisplayAudiosPage = () => {
 
 
     return(
-            <div>
+            <div className = "container">
             <input id = "first-input" type="file" onChange = {onChange}/>
             <div className = "row">
                 <div className="col-md-8">
@@ -106,7 +108,7 @@ const DisplayAudiosPage = () => {
                 <div className="col-md-4">
                     
                     <div class="upload">
-                            {uploadMutationLoading && <Loader type="ThreeDots" color="#00BFFF" height={12} width={80} />}   
+                            {uploadMutationLoading && <Loader type="ThreeDots" color="#3C4A93" height={12} width={80} />}   
                             <span>
                                 <label htmlFor="upload-file"> 
                                     <img src={uploadImage} alt="upload-image"/><br/>

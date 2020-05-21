@@ -1,11 +1,9 @@
-/* Position and sizing of burger button */
-
 .bm-burger-button {
     position: fixed;
     width: 25px;
     height: 25px;
     left: 36px;
-    top: 25px;
+    top: 29px;
 }
 
 
@@ -28,7 +26,6 @@
 .bm-cross-button {
     height: 24px;
     width: 24px;
-    display: none;
 }
 
 
@@ -68,39 +65,45 @@
 
 /* Wrapper for item list */
 
-
-/* .bm-item-list {
+.bm-item-list {
     color: #b8b7ad;
     padding: 0.8em;
-} */
+}
 
 
 /* Individual item */
 
-
-/* .bm-item {
+.bm-item {
     display: inline-block;
-} */
-
-img {
-    width: 250px !important;
-    height: 300px !important;
+    color: white;
+    margin-top: 40px;
+    margin-left: 30px;
 }
 
-[alt=star] {
-    width: 80px !important;
-    height: 80px !important;
-    margin-left: 80px;
-    margin-bottom: 50px;
-}
-
-[name="logout"] {
-    margin-left: 50px;
+.bm-item:hover {
+    color: #FB6B46;
+    text-decoration: none;
 }
 
 
 /* Styling of overlay */
 
 .bm-overlay {
-    background: rgba(235, 17, 17, 0.3);
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.menu-item .fas {
+    font-size: 45px;
+    padding-left: 45px;
+}
+
+.sideLinks {
+    padding: 45px;
+    padding-top: 50px;
+}
+
+#logout {
+    margin-top: 100px;
+    margin-left: 40px;
+    width: 150px !important;
 }

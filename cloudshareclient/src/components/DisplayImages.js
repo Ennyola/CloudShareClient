@@ -52,21 +52,24 @@ const  DisplayImages = (props)=>{
              }
 
             const onClick=(url)=>{
-                deleteImageMutation({
-                    variables:{url},
-                    refetchQueries : [{
-                        query : getImage,
-                        variables : {username: user}
-                    }],
-                })
+                if(window.confirm('Are you sure you want to delete this file')){
+                    deleteImageMutation({
+                        variables:{url},
+                        refetchQueries : [{
+                            query : getImage,
+                            variables : {username: user}
+                        }],
+                    })
+                }
+                
             }
             const download=(url, id)=>{
                 saveAs(url, id)
 
             }
 
-            if (queryLoading) return (<div> <Loader type="TailSpin" color="#00BFFF" height={80} width={80} /></div> )
-            if (queryError) return (<div> <h4> Error :(  ...There seems to be an error getting your Files. Please reload </h4> </div>)
+            if (queryLoading) return (<div className = "load-position"> <Loader type="TailSpin" color="#3C4A93" height={80} width={80} /></div> )
+            if (queryError) return (<div className = "fetch-error"> <h4> Error :(  ...There seems to be an error getting your Files. Please reload </h4> </div>)
             const  {getfiles} = data
             
             const displayImages = ()=>{
@@ -74,17 +77,22 @@ const  DisplayImages = (props)=>{
                     return getfiles.map(({id, url, size})=>{
                         return(
                             <li key = {id}>
+                                
                                 <a href={url} target="_blank" rel="noopener noreferrer" download > {id} </a>
-                                  <i className="fas fa-download" onClick ={()=> {download(url, id)}}></i>
-                                <WhatsappShareButton url = {url}>
-                                    <WhatsappIcon size={32} round={true}/>
-                                </WhatsappShareButton>
-                                <TwitterShareButton url = {url} title= {"Check out this link"} via={"CloudShare"} hashtags = {["cloudshare"]}>
-                                    <TwitterIcon size={32} round={true}/>
-                                </TwitterShareButton>
-                                <i className="fas fa-trash"  onClick ={()=> {onClick(url)}}></i>
+                                <span className = "display-links">
+                                    <i className="fas fa-download" onClick ={()=> {download(url, id)}}></i>
+                                    <i className="fas fa-trash"  onClick ={()=> {onClick(url)}}></i>
+                                </span>
                         
                                 <span className="file-size">{size}</span>
+                                <span className = "social-share">
+                                    <WhatsappShareButton url = {url}>
+                                        <WhatsappIcon size={28} borderRadius = {567}/>
+                                    </WhatsappShareButton>
+                                    <TwitterShareButton url = {url} title= {"Check out this link"} via={"CloudShare"} hashtags = {["cloudshare"]}>
+                                        <TwitterIcon size={28} round={true}/>
+                                    </TwitterShareButton>
+                                </span>
                                 <hr/>   
                             </li>
                         )
@@ -93,37 +101,37 @@ const  DisplayImages = (props)=>{
                 };
                         
             return(
-                <div>
-                <input id = "first-input" type="file" onChange = {onChange}/>
-                <div className="row">
-                    <div className="col-md-8">
-                        <div className = "files">
-                            <ul>
-                                {displayImages()}     
-                            </ul>
+                <div className = "container">
+                    <input id = "first-input" type="file" onChange = {onChange}/>
+                    <div className="row">
+                        <div className="col-md-8">
+                            <div className = "files">
+                                <ul >
+                                    {displayImages()}     
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                    <div className="col-md-4">
-                        
-                        <div className="upload">
-                                {uploadMutationLoading && <Loader type="ThreeDots" color="#00BFFF" height={12} width={80} />}
-                                <span>
-                                    <label htmlFor="upload-file"> 
-                                        <img src={uploadImage} alt="upload-image"/><br/>
-                                        <span> Click to upload a File </span>
-                                    </label>
-                                    <input
-                                    onChange = {onChange}
-                                    type="file"  id="upload-file"/>
-                                </span>
+                        <div className="col-md-4">
+                            
+                            <div className="upload">
+                                    {uploadMutationLoading && <Loader type="ThreeDots" color="#00BFFF" height={12} width={80} />}
+                                    <span>
+                                        <label htmlFor="upload-file"> 
+                                            <img src={uploadImage} alt="upload-image"/><br/>
+                                            <span> Click to upload a File </span>
+                                        </label>
+                                        <input
+                                        onChange = {onChange}
+                                        type="file"  id="upload-file"/>
+                                    </span>
 
-                            
-                            {uploadMutationError && <p>Error :( Please try again</p>}
-                            
+                                
+                                {uploadMutationError && <p>Error :( Please try again</p>}
+                                
+                            </div>
                         </div>
+                        
                     </div>
-                    
-                </div>
                 </div>
              )
             

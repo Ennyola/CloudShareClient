@@ -8,15 +8,14 @@ import '../public/css/burger.css'
 
 class Homepage extends Component{
     render(){
-        const { username } = this.props.match.params
+        // const { username } = this.props.match.params
         return( 
             <div id="outer-container">
                 <Sidebar pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }/>
-                
                 <div id = "page-wrap">
-                    <Header username = { username } />
+                    <Header/>
                     <div className = "upload-body ">
-                        <PageLinks/>
+                        {/* <PageLinks/> */}
                         <DisplayImages/>
                     </div>
                 </div>

@@ -17,7 +17,7 @@ class Videos extends Component{
                 <div id = "page-wrap">
                     <Header/>
                     <div className = "upload-body ">
-                        <PageLinks/>
+                        {/* <PageLinks/> */}
                         <DisplayVideos/>
                         
                     </div>

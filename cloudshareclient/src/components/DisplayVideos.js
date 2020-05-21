@@ -46,6 +46,7 @@ const DisplayVideos = ()=>{
 
             
                 const onClick=(url)=>{
+                    if(window.confirm('Are you sure you want to delete this file')){
                     deleteMutation({
                         variables:{url},
                         refetchQueries : [{
@@ -54,6 +55,7 @@ const DisplayVideos = ()=>{
                         }],
                     })
                 }
+            }
                 const download=(url, id)=>{
                     saveAs(url, id)
     
@@ -63,8 +65,8 @@ const DisplayVideos = ()=>{
 
    
 
-    if (queryLoading) return (<div> <Loader type="TailSpin" color="#00BFFF" height={80} width={80} /></div> )
-    if (queryError) return (<div> <h4> Error :(  ...There seems to be an error getting your Files. Please reload </h4></div>)
+    if (queryLoading) return (<div className = "load-position"> <Loader type="TailSpin" color="#3C4A93" height={80} width={80} /></div> )
+    if (queryError) return (<div className = "fetch-error"> <h4> Error :(  ...There seems to be an error getting your Files. Please reload </h4></div>)
 
     const {queryVideos} = data
             
@@ -92,7 +94,7 @@ const DisplayVideos = ()=>{
                 };
 
     return(
-            <div>
+            <div className = "container">
             <input id = "first-input" type="file" onChange = {onChange}/>
             <div className = "row">
                 <div className="col-md-8">
