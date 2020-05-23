@@ -13,6 +13,7 @@
 .user {
     float: right;
     margin-right: 10%;
+    padding-top: 6px;
 }
 
 .platform {
@@ -43,7 +44,7 @@
 
 .upload-body {
     background-color: #E5E5E5;
-    height: 30cm;
+    height: 25cm;
     padding-top: 4cm;
 }
 
@@ -190,7 +191,7 @@ label span {
 
 .load-position {
     margin-top: 80px;
-    margin-left: 40%;
+    margin-left: 45%;
 }
 
 .fetch-error {
@@ -244,5 +245,14 @@ label span {
     .files {
         margin-left: 15px;
         width: 90%;
+    }
+}
+
+@media(max-width: 541px) {
+    .user {
+        display: none;
+    }
+    .navbar-brand {
+        padding-left: 50px;
     }
 }

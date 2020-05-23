@@ -71,14 +71,17 @@ const DisplayRawFiles = (props)=>{
                 return(
                     <li key = {id}>
                         <a href={url} target="_blank" rel="noopener noreferrer"> {id} </a>
-                        <i className="fas fa-download" onClick ={()=> {download(url, id)}}></i> 
+                        <span className = "display-links">
+                            <i className="fas fa-download" onClick ={()=> {download(url, id)}}></i> 
+                            <i className="fas fa-trash"  onClick ={()=> {onClick(url)}}></i>
+                        </span>
                          <WhatsappShareButton url = {url}>
                              <WhatsappIcon size={32} round={true}/>
                         </WhatsappShareButton>
                         <TwitterShareButton url = {url} title= {"Check out this link"} via={"CloudShare"} hashtags = {["cloudshare"]}>
                             <TwitterIcon size={32} round={true}/>
                         </TwitterShareButton>
-                        <i className="fas fa-trash"  onClick ={()=> {onClick(url)}}></i>
+                        
 
                         <span className="file-size">{size}</span>
                         <hr/>   

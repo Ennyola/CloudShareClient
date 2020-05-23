@@ -78,6 +78,7 @@
     color: white;
     margin-top: 40px;
     margin-left: 30px;
+    outline: none;
 }
 
 .bm-item:hover {
@@ -100,6 +101,24 @@
 .sideLinks {
     padding: 45px;
     padding-top: 50px;
+}
+
+.message {
+    text-transform: uppercase;
+    margin-top: -10px;
+    margin-bottom: 70px;
+    margin-left: 30px;
+    font-size: larger;
+    color: #FB6B46;
+    font-weight: bold;
+}
+
+.hello {
+    font-style: italic;
+    font-size: 17px;
+    margin-right: 5px;
+    color: white;
+    font-weight: normal;
 }
 
 #logout {
