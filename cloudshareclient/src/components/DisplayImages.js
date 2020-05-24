@@ -6,6 +6,7 @@ import { createUploadLink } from 'apollo-upload-client'
 import { saveAs } from 'file-saver';
 import {WhatsappShareButton, TwitterShareButton, WhatsappIcon, TwitterIcon} from 'react-share'
 import Loader from 'react-loader-spinner'
+import Popover from 'react-tiny-popover';
 
 
 import getImage from '../queries/getImage'
@@ -17,9 +18,6 @@ import '../public/css/header.css'
 import  gql  from 'graphql-tag';
 
 const  DisplayImages = (props)=>{
-
-            
-
             const user = localStorage.getItem("username")
 
             //fetch all images if available
@@ -39,6 +37,7 @@ const  DisplayImages = (props)=>{
 
 
             const [image, setImage] = useState()
+            const [isPopoverOpen, setPopoverOpen] = useState(false)
 
             function onChange({    target: {   validity,files: [file],},}) {
                 if (validity.valid){
@@ -68,8 +67,14 @@ const  DisplayImages = (props)=>{
 
             }
 
-            if (queryLoading) return (<div className = "load-position"> <Loader type="TailSpin" color="#3C4A93" height={80} width={80} /></div> )
-            if (queryError) return (<div className = "fetch-error"> <h4> Error :(  ...There seems to be an error getting your Files. Please reload </h4> </div>)
+            if (queryLoading) return (
+                 <div className = "load-position"> <Loader type="TailSpin" color="#3C4A93" height={80} width={80} /></div> 
+            )
+            if (queryError) return (
+            <div className = "fetch-error"> <h4> Error :(  ...There seems to be an error getting your Files. Please reload </h4> </div>
+            
+                )
+            
             const  {getfiles} = data
             
             const displayImages = ()=>{
@@ -85,6 +90,25 @@ const  DisplayImages = (props)=>{
                                 </span>
                         
                                 <span className="file-size">{size}</span>
+                                <Popover
+                                    isOpen  = {isPopoverOpen}
+                                    position = {'left'}
+                                    onClickOutside = {()=>{setPopoverOpen(false)}}
+                                    content = {(
+                                    <span>
+                                        <WhatsappShareButton url = {url}>
+                                            <WhatsappIcon size={28} borderRadius = {567}/>
+                                        </WhatsappShareButton>
+                                        <TwitterShareButton url = {url} title= {"Check out this link"} via={"CloudShare"} hashtags = {["cloudshare"]}>
+                                            <TwitterIcon size={28} round={true}/>
+                                        </TwitterShareButton>
+                                    </span>
+                                )}>
+                                    <div onClick={() =>{ setPopoverOpen(true)}}>
+                                        {/* <i class="fas fa-share-alt"></i> */}
+                                        Share
+                                    </div>
+                                </Popover>
                                 <span className = "social-share">
                                     <WhatsappShareButton url = {url}>
                                         <WhatsappIcon size={28} borderRadius = {567}/>

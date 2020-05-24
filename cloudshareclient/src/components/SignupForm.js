@@ -10,7 +10,7 @@ class SignupForm extends Component{
     constructor(props){
         super(props)
 
-        this.state = {email : "", username:"", password:""}
+        this.state = {email : "", username:"", password:"", rtPassword:"",errors:[]}
     }
 
     componentDidUpdate(nextProps){
@@ -21,21 +21,33 @@ class SignupForm extends Component{
             this.props.history.push(`/homepage/${username}`)
         }
     }
-
+    
     onSubmit(event){
         event.preventDefault()
+        
+        if(this.state.password !== this.state.rtPassword){
+            this.setState({errors:["Passwords do not match"]})
+        }
+        else{        
+                this.props.mutate({
+                    variables :{
+                        email : this.state.email,
+                        username : this.state.username,
+                        password: this.state.password
+                    }
+                }).then((data)=>{
+                    this.props.data.refetch()
+                    const{ token } = data.data.createUser.tokenAuth
+                    localStorage.setItem('token', token)
+                })
+                .catch((res)=>{
+                    const errors = res.graphQLErrors.map((error)=>{
+                        return error.message
+                    })
 
-        this.props.mutate({
-            variables :{
-                email : this.state.email,
-                username : this.state.username,
-                password: this.state.password
+                    this.setState({errors})
+                })
             }
-        }).then((data)=>{
-            this.props.data.refetch()
-            const{ token } = data.data.createUser.tokenAuth
-            localStorage.setItem('token', token)
-        })
     }
 
 
@@ -76,11 +88,19 @@ class SignupForm extends Component{
                             type="password" name="password" className="form-control" placeholder="Password" required/>
                         </div>
                         <div className="md-form">
-                            <input type="password" name="vfpassword" className="form-control" placeholder="Verify Password" required/>
+                            <input
+                            value = {this.state.rtPassword}
+                            onChange = {(e)=>this.setState({rtPassword:e.target.value})}
+                             type="password" name="vfpassword" className="form-control" placeholder="Verify Password" required/>
                         </div>
 
                         <button type="submit" className="btn btn-primary"> Submit</button>
                     </form>
+                    <div className = "auth-error">
+                        { this.state.errors.map((error)=>{
+                        return <div key = {error}> {error} </div> 
+                        }) }
+                    </div>
                     <div className="login-option">
                         <p> Have an account already? <Link to = "/login">Login instead</Link> </p>
                     </div>

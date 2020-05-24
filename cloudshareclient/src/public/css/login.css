@@ -35,3 +35,9 @@ form h4 {
     font-weight: 700;
     font-style: italic;
 }
+
+.auth-error {
+    color: red;
+    font-style: italic;
+    font-weight: bold;
+}

@@ -13,7 +13,7 @@ class Header extends Component{
             <div className = "header">
                     <Link className = "navbar-brand" to = {`/homepage/${username}`}>
                         <img src={ bookImage } alt="logo-image"/>
-                        <span className="platform">  UPLODA  </span>
+                        <span className="platform">  AWPLODER  </span>
                     </Link>
     
                     <span className="user">

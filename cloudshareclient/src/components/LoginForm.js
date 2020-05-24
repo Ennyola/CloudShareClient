@@ -3,6 +3,7 @@ import {Link } from 'react-router-dom'
 import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
 import query from '../queries/getLoggedInUser'
+import Loader from 'react-loader-spinner'
 
 
 
@@ -14,7 +15,7 @@ class LoginForm extends Component{
     constructor(props){
         super(props)
 
-        this.state = { email :"", password:""}
+        this.state = { email :"", password:"", errors:[]}
     }
 
     componentDidUpdate(prevProps){
@@ -45,6 +46,13 @@ class LoginForm extends Component{
             const { token} = data.data.tokenAuth
             _saveUserData(token)   
             
+        })
+        .catch((res)=>{
+            const errors = res.graphQLErrors.map((error)=>{
+               return error.message
+            })
+            this.setState({errors})
+
         })
 
     }
@@ -78,6 +86,13 @@ class LoginForm extends Component{
 
                                 <button type = "submit" className=  "btn btn-primary"> Login</button>
                             </form>
+                            <div className = "auth-error">
+
+                            
+                            {this.state.errors.map((error)=>{
+                               return( <div key= {error}>{error}</div>)
+                            })}
+                            </div>
                         </div>
 
                         <div className = "signup-option">

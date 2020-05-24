@@ -197,6 +197,7 @@ label span {
 .fetch-error {
     color: red;
     margin-left: 20%;
+    margin-top: 250px;
 }
 
 .display-links i {
