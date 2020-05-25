@@ -76,6 +76,27 @@ const  DisplayImages = (props)=>{
                 )
             
             const  {getfiles} = data
+            const popover = (url)=>{
+                return(
+                <Popover
+                    isOpen  = {isPopoverOpen}
+                    position = {'top'}
+                    padding = {50}
+                    content = {(
+                    <span>
+                        <WhatsappShareButton url = {url}>
+                            <WhatsappIcon size={28} borderRadius = {567}/>
+                        </WhatsappShareButton>
+                        <TwitterShareButton url = {url} title= {"Check out this link"} via={"AWPLODER"}>
+                            <TwitterIcon size={28} round={true}/>
+                        </TwitterShareButton>
+                    </span>
+                                )}>
+                <i class="fas fa-share-alt"  onClick={() =>{ setPopoverOpen(!isPopoverOpen)}}></i>
+            </Popover>
+            )
+
+            }
             
             const displayImages = ()=>{
                 if (getfiles){ 
@@ -88,35 +109,18 @@ const  DisplayImages = (props)=>{
                                     <i className="fas fa-download" onClick ={()=> {download(url, id)}}></i>
                                     <i className="fas fa-trash"  onClick ={()=> {onClick(url)}}></i>
                                 </span>
+                                {popover(url)}
                         
                                 <span className="file-size">{size}</span>
-                                <Popover
-                                    isOpen  = {isPopoverOpen}
-                                    position = {'left'}
-                                    onClickOutside = {()=>{setPopoverOpen(false)}}
-                                    content = {(
-                                    <span>
-                                        <WhatsappShareButton url = {url}>
-                                            <WhatsappIcon size={28} borderRadius = {567}/>
-                                        </WhatsappShareButton>
-                                        <TwitterShareButton url = {url} title= {"Check out this link"} via={"CloudShare"} hashtags = {["cloudshare"]}>
-                                            <TwitterIcon size={28} round={true}/>
-                                        </TwitterShareButton>
-                                    </span>
-                                )}>
-                                    <div onClick={() =>{ setPopoverOpen(true)}}>
-                                        {/* <i class="fas fa-share-alt"></i> */}
-                                        Share
-                                    </div>
-                                </Popover>
-                                <span className = "social-share">
+                               
+                                {/* <span className = "social-share">
                                     <WhatsappShareButton url = {url}>
                                         <WhatsappIcon size={28} borderRadius = {567}/>
                                     </WhatsappShareButton>
                                     <TwitterShareButton url = {url} title= {"Check out this link"} via={"CloudShare"} hashtags = {["cloudshare"]}>
                                         <TwitterIcon size={28} round={true}/>
                                     </TwitterShareButton>
-                                </span>
+                                </span> */}
                                 <hr/>   
                             </li>
                         )

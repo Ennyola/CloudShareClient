@@ -200,7 +200,42 @@ label span {
     margin-top: 250px;
 }
 
-.display-links i {
+.pop {
+    width: 30px;
+    float: right;
+    padding-left: 23px;
+}
+
+.options {
+    background-color: white;
+    font-size: 15px;
+    padding-top: 20px;
+    width: 150px;
+    border-radius: 15px;
+}
+
+.options p {
+    cursor: pointer;
+    margin-left: 50px;
+}
+
+.fas {
+    cursor: pointer;
+}
+
+.share {
+    background-color: white;
+    padding: 25px;
+    border-radius: 15px;
+}
+
+.share-icons {
+    display: block;
+    margin-top: 10px;
+}
+
+
+/* .display-links i {
     font-size: 20px;
     cursor: pointer;
 }
@@ -211,7 +246,7 @@ label span {
 
 .display-links .fa-trash {
     color: red;
-}
+} */
 
 @media(max-width: 1000px) {
     #first-input {
