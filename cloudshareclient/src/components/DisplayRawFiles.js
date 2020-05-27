@@ -6,6 +6,7 @@ import { createUploadLink } from 'apollo-upload-client'
 import { saveAs } from 'file-saver';
 import {WhatsappShareButton, TwitterShareButton, WhatsappIcon, TwitterIcon} from 'react-share'
 import Loader from 'react-loader-spinner'
+import Popover from 'react-awesome-popover'
 
 import query from '../queries/getRawFile'
 import uploadFileMutation from '../mutations/uploadFileMutation'
@@ -65,25 +66,50 @@ const DisplayRawFiles = (props)=>{
 
     const {getRawFiles} = data
 
+    const sharePopover = (url)=>{
+        return(  
+                  <Popover placement = "right-center"  arrow = {false} >
+                      <p>Share</p>
+                      <div className = "share" >
+                          <WhatsappShareButton url = {url}>
+                            <WhatsappIcon size={28} round={true} className = "share-icons"/>
+                          </WhatsappShareButton>
+                          <TwitterShareButton url = {url} title= {"Check out this link"} via={"AWPLODER"}>
+                              <TwitterIcon size={28} round={true} className = "share-icons"/>
+                          </TwitterShareButton>
+                  </div>
+                  </Popover>
+               )
+}
+
+const optionPopover=(url, id)=>{
+  return(
+  <Popover className = "pop" arrow = {false} placement = "left-center">
+      <i className="fas fa-ellipsis-v"></i>
+      <div className = "options">
+          <p onClick ={()=> {download(url, id)}}>Download</p>
+          {sharePopover(url)}
+          <p onClick ={()=> {onClick(url)}}>Delete</p>
+          
+      </div>
+  </Popover>
+  )
+
+}
+
     const displayRawFiles = ()=>{
         if (getRawFiles){
             return getRawFiles.map(({id, url, size})=>{
                 return(
                     <li key = {id}>
                         <a href={url} target="_blank" rel="noopener noreferrer"> {id} </a>
-                        <span className = "display-links">
-                            <i className="fas fa-download" onClick ={()=> {download(url, id)}}></i> 
-                            <i className="fas fa-trash"  onClick ={()=> {onClick(url)}}></i>
-                        </span>
-                         <WhatsappShareButton url = {url}>
-                             <WhatsappIcon size={32} round={true}/>
-                        </WhatsappShareButton>
-                        <TwitterShareButton url = {url} title= {"Check out this link"} via={"CloudShare"} hashtags = {["cloudshare"]}>
-                            <TwitterIcon size={32} round={true}/>
-                        </TwitterShareButton>
-                        
+                       
 
-                        <span className="file-size">{size}</span>
+                        <span className="file-size">
+                            {size}
+                            {optionPopover(url, id)}
+                        </span>
+                        
                         <hr/>   
                     </li>
                 )

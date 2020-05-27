@@ -74,9 +74,9 @@ const DisplayAudiosPage = () => {
 
     const sharePopover = (url)=>{
               return(  
-                        <Popover placement = "right-center">
+                        <Popover placement = "right-center" arrow = {false}>
                             <p>Share</p>
-                            <div className = "share">
+                            <div className = "share"  >
                                 <WhatsappShareButton url = {url}>
                                   <WhatsappIcon size={28} round={true} className = "share-icons"/>
                                 </WhatsappShareButton>
@@ -90,12 +90,12 @@ const DisplayAudiosPage = () => {
     
     const optionPopover=(url, id)=>{
         return(
-        <Popover className = "pop" arrow = {false}>
+        <Popover className = "pop" arrow = {false} placement = "left-center">
             <i className="fas fa-ellipsis-v"></i>
             <div className = "options">
                 <p onClick ={()=> {download(url, id)}}>Download</p>
-                <p onClick ={()=> {onClick(url)}}>Delete</p>
                 {sharePopover(url)}
+                <p onClick ={()=> {onClick(url)}}>Delete</p>
             </div>
         </Popover>
         )
@@ -108,10 +108,12 @@ const DisplayAudiosPage = () => {
                 return(
                     <li key = {id}>
                         <a href={url} target="_blank" rel="noopener noreferrer"> {id} </a>
-                        {optionPopover(url, id)}
-                        <span className="file-size">{size}</span>
                        
-                        {/* {sharePopover(url)} */}
+                        <span className="file-size">
+                        {size}
+                        {optionPopover(url, id)}
+                        </span>
+                       
                         <hr/>   
                     </li>
                 )
