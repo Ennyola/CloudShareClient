@@ -7,11 +7,12 @@ import DisplayImages from './DisplayImages'
 import '../public/css/burger.css'
 
 class Homepage extends Component{
-    render(){
+    render()
+    {
         // const { username } = this.props.match.params
         return( 
             <div id="outer-container">
-                <Sidebar pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }/>
+                <Sidebar pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" } imagePage = {true}/>
                 <div id = "page-wrap">
                     <Header/>
                     <div className = "upload-body ">

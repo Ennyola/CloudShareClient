@@ -11,7 +11,7 @@ class Audios extends Component{
         return(
             
             <div id="outer-container" > 
-                <Sidebar pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }/>
+                <Sidebar pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" } audiosPage = {true}/>
                 
                 <div id = "page-wrap">
                     <Header/>

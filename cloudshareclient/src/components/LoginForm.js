@@ -18,6 +18,7 @@ class LoginForm extends Component{
         this.state = { email :"", password:"", errors:[]}
     }
 
+
     componentDidUpdate(prevProps){
         const {user} = this.props.data
         if(user){
@@ -25,7 +26,9 @@ class LoginForm extends Component{
             localStorage.setItem('username', username)
             this.props.history.push(`/homepage/${username}`)
         }
+        
     }
+
 
 
     onSubmit(event){
@@ -34,6 +37,7 @@ class LoginForm extends Component{
         const _saveUserData = (token) => {
             localStorage.setItem('token', token)
         }
+        
 
         this.props.mutate({
             variables :{ 
@@ -45,13 +49,13 @@ class LoginForm extends Component{
             this.props.data.refetch()
             const { token} = data.data.tokenAuth
             _saveUserData(token)   
-            
         })
         .catch((res)=>{
             const errors = res.graphQLErrors.map((error)=>{
                return error.message
             })
-            this.setState({errors})
+            this.setState({errors, email : "", password : ""})
+            
 
         })
 

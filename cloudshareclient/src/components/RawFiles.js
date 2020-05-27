@@ -11,7 +11,7 @@ class RawFiles extends Component{
         return(
             
             <div id="outer-container" > 
-                <Sidebar pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }/>
+                <Sidebar pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" } documentsPage = {true} />
                 
                 <div id = "page-wrap">
                     <Header/>

@@ -94,8 +94,7 @@ const DisplayVideos = ()=>{
                 <div className = "options">
                     <p onClick ={()=> {download(url, id)}}>Download</p>
                     {sharePopover(url)}
-                    <p onClick ={()=> {onClick(url)}}>Delete</p>
-                   
+                    <p onClick ={()=> {onClick(url)}}>Delete</p>         
                 </div>
             </Popover>
             )

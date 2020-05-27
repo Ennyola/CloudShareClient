@@ -45,7 +45,7 @@ class SignupForm extends Component{
                         return error.message
                     })
 
-                    this.setState({errors})
+                    this.setState({errors, email : "", password : ""})
                 })
             }
     }
