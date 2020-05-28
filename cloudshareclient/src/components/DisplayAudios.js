@@ -121,10 +121,31 @@ const DisplayAudiosPage = () => {
         }
         };
 
+        const showLoaderOrImageInput=()=>{
+            const inputFile = <span>
+                                <label htmlFor="upload-file"> 
+                                    <img src={uploadImage} alt="upload-image"/><br/>
+                                    <span> Click to upload a File </span>
+                                </label>
+                                <input
+                                onChange = {onChange}
+                                type="file"  id="upload-file"/>
+                             </span>
+            const loader = <Loader type="TailSpin" color="#00BFFF" height={30} width={80} />
+
+            return uploadMutationLoading ?  loader : inputFile 
+        }
+        const showLoaderOrButtonInput=()=>{
+            const inputFile = <input id = "first-input" type="file" onChange = {onChange}/>
+            const loader = <Loader type="TailSpin" color="#00BFFF" height={30} width={80} />
+
+            return uploadMutationLoading ?  loader : inputFile 
+        }
+
 
     return(
             <div className = "container">
-            <input id = "first-input" type="file" onChange = {onChange}/>
+            {showLoaderOrButtonInput()}
             <div className = "row">
                 <div className="col-md-8">
                     <div className = "files">
@@ -136,17 +157,7 @@ const DisplayAudiosPage = () => {
                 <div className="col-md-4">
                     
                     <div class="upload">
-                            {uploadMutationLoading && <Loader type="ThreeDots" color="#3C4A93" height={12} width={80} />}   
-                            <span>
-                                <label htmlFor="upload-file"> 
-                                    <img src={uploadImage} alt="upload-image"/><br/>
-                                    <span> Click to upload a File </span>
-                                </label>
-                                
-                                <input
-                                    onChange = {onChange}
-                                type="file"  id="upload-file"/>
-                            </span>
+                            {showLoaderOrImageInput()}
                     
                         {uploadMutationError && <p>Error :( Please try again</p>}
                     </div>

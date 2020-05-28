@@ -15,7 +15,7 @@ class LoginForm extends Component{
     constructor(props){
         super(props)
 
-        this.state = { email :"", password:"", errors:[]}
+        this.state = { email :"", password:"", errors:[], loading : false}
     }
 
 
@@ -29,10 +29,18 @@ class LoginForm extends Component{
         
     }
 
+    showSpinner(){
+        if (this.state.loading){
+        return (<div className = "load-position" style = {{position :"absolute", top :'200px', left:"-10px", zIndex : -1}}> <Loader type="TailSpin" color="#3C4A93" height={80} width={80} /></div> )
+        }
+         
+    }
+
 
 
     onSubmit(event){
         event.preventDefault();
+        this.setState({loading : true})
 
         const _saveUserData = (token) => {
             localStorage.setItem('token', token)
@@ -54,7 +62,7 @@ class LoginForm extends Component{
             const errors = res.graphQLErrors.map((error)=>{
                return error.message
             })
-            this.setState({errors, email : "", password : ""})
+            this.setState({errors, email : "", password : "", loading: false})
             
 
         })
@@ -87,7 +95,7 @@ class LoginForm extends Component{
                                     onChange={(e)=>this.setState({password : e.target.value})}
                                     id="password" type = "password" placeholder="Password" className="form-control" required/>
                                 </div>
-
+                                {this.showSpinner()}
                                 <button type = "submit" className=  "btn btn-primary"> Login</button>
                             </form>
                             <div className = "auth-error">

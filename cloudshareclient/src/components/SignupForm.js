@@ -4,13 +4,14 @@ import  gql  from 'graphql-tag'
 import design from '../public/images/design.png'
 import { Link } from 'react-router-dom'
 import query from '../queries/getLoggedInUser'
+import Loader from 'react-loader-spinner'
 
 class SignupForm extends Component{
     
     constructor(props){
         super(props)
 
-        this.state = {email : "", username:"", password:"", rtPassword:"",errors:[]}
+        this.state = {email : "", username:"", password:"", rtPassword:"",errors:[], loading : false}
     }
 
     componentDidUpdate(nextProps){
@@ -21,12 +22,18 @@ class SignupForm extends Component{
             this.props.history.push(`/homepage/${username}`)
         }
     }
+    showSpinner(){
+        if (this.state.loading){
+        return (<div className = "load-position" style = {{position :"absolute", top :'200px', left:"-10px", zIndex : -1}}> <Loader type="TailSpin" color="#3C4A93" height={80} width={80} /></div> )
+        }
+         
+    }
     
     onSubmit(event){
         event.preventDefault()
-        
+        this.setState({loading:true})
         if(this.state.password !== this.state.rtPassword){
-            this.setState({errors:["Passwords do not match"]})
+            this.setState({errors:["Passwords do not match"], loading:false})
         }
         else{        
                 this.props.mutate({
@@ -45,7 +52,7 @@ class SignupForm extends Component{
                         return error.message
                     })
 
-                    this.setState({errors, email : "", password : ""})
+                    this.setState({errors, email : "", password : "",loading:false})
                 })
             }
     }

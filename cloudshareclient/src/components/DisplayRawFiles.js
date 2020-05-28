@@ -117,11 +117,30 @@ const optionPopover=(url, id)=>{
         }
     }
 
+    const showLoaderOrImageInput=()=>{
+        const inputFile = <span>
+                            <label htmlFor="upload-file"> 
+                                <img src={uploadImage} alt="upload-image"/><br/>
+                                <span> Click to upload a File </span>
+                            </label>
+                            <input
+                            onChange = {onChange}
+                            type="file"  id="upload-file"/>
+                         </span>
+        const loader = <Loader type="TailSpin" color="#00BFFF" height={30} width={80} />
 
+        return uploadMutationLoading ?  loader : inputFile 
+    }
+    const showLoaderOrButtonInput=()=>{
+        const inputFile = <input id = "first-input" type="file" onChange = {onChange}/>
+        const loader = <Loader type="TailSpin" color="#00BFFF" height={30} width={80} />
+
+        return uploadMutationLoading ?  loader : inputFile 
+    }
     
     return(
         <div className = "container">
-         <input id = "first-input" type="file" onChange = {onChange}/>
+        {showLoaderOrButtonInput()}
         <div className = "row">
             <div className="col-md-8">
                 <div className = "files">
@@ -131,20 +150,9 @@ const optionPopover=(url, id)=>{
                 </div>
             </div>
             <div className="col-md-4">
-                {uploadMutationLoading && <Loader type="ThreeDots" color="#00BFFF" height={12} width={80} />}
                 <div class="upload">
                     
-                            
-                      <span>
-                        <label htmlFor="upload-file"> 
-                            <img src={uploadImage} alt="upload-image"/><br/>
-                            <span> Click to upload a File </span>
-                        </label>
-                        
-                        <input
-                        onChange = {onChange}
-                        type="file"  id="upload-file"/><br/>
-                       </span>
+                    {showLoaderOrImageInput()}
                        
                     {uploadMutationError && <p>Error :( Please try again</p>}
                 </div>
