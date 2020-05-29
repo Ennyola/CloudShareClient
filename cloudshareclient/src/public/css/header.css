@@ -194,6 +194,18 @@ label span {
     margin-left: 45%;
 }
 
+.imageInputLoader {
+    position: relative;
+    top: 80px;
+    left: 78px;
+}
+
+.buttonInputLoader {
+    display: none;
+    margin-left: 80%;
+    margin-bottom: 45px;
+}
+
 .fetch-error {
     color: red;
     margin-left: 20%;
@@ -257,6 +269,9 @@ label span {
 
 @media(max-width: 1000px) {
     #first-input {
+        display: block;
+    }
+    .buttonInputLoader {
         display: block;
     }
     .upload {

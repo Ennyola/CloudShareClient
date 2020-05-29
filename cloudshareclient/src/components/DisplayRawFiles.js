@@ -131,13 +131,13 @@ const optionPopover=(url, id)=>{
                             onChange = {onChange}
                             type="file"  id="upload-file"/>
                          </span>
-        const loader = <Loader type="TailSpin" color="#00BFFF" height={30} width={80} />
+        const loader = <span className = "imageInputLoader"><Loader type="TailSpin" color="#00BFFF" height={50} width={120} /></span> 
 
-        return uploadMutationLoading ?  loader : inputFile 
+        return uploadMutationLoading ?  loader : inputFile
     }
     const showLoaderOrButtonInput=()=>{
         const inputFile = <input id = "first-input" type="file" onChange = {onChange}/>
-        const loader = <Loader type="TailSpin" color="#00BFFF" height={30} width={80} />
+        const loader = <div className = "buttonInputLoader"><Loader type="TailSpin" color="#00BFFF" height={50} width={120} /></div>
 
         return uploadMutationLoading ?  loader : inputFile 
     }
