@@ -8,7 +8,7 @@ import Loader from 'react-loader-spinner'
 
 
 import design from '../public/images/design.png'
-import '../public/css/login.css'
+import '../public/css/authentication.css'
 
 
 class LoginForm extends Component{
@@ -31,7 +31,7 @@ class LoginForm extends Component{
 
     showSpinner(){
         if (this.state.loading){
-        return (<div className = "load-position" style = {{position :"absolute", top :'200px', left:"-10px", zIndex : -1}}> <Loader type="TailSpin" color="#3C4A93" height={80} width={80} /></div> )
+        return (<div className = "load-position" style = {{position :"absolute", top :'200px', left:"-10px", zIndex : 1}}> <Loader type="TailSpin" color="#3C4A93" height={80} width={80} /></div> )
         }
          
     }
@@ -71,16 +71,16 @@ class LoginForm extends Component{
 
     render(){
         return(
-            <div className = "container">
+            <div className = "login-form container">
                 <div className = "row">
                     <div className = "col-md-6">
                     
-                        <h1>CLOUDSHARE</h1>
+                        <h1>AWPLODER</h1>
                         
                         {/* the actual form itself */}
                         <div>
                             <form onSubmit = {this.onSubmit.bind(this)}>
-                                <h4>LOGIN</h4>
+                                <h4 id = "login-header">LOGIN</h4>
 
                                 <div className="md-form email-div">
                                     <input 
@@ -114,7 +114,7 @@ class LoginForm extends Component{
                     </div>
 
 
-                    <div className = "col-md-6"> <img src={design} alt="design"/> </div>
+                    <div className = "col-md-6 login-design"> <img src={design} alt="design"/> </div>
                 </div>
             </div>
         

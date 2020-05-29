@@ -1,0 +1,94 @@
+body {
+    margin: 0;
+    height: 100vh;
+    width: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+h1 {
+    color: #3C4A93;
+    font-weight: 900;
+}
+
+form {
+    margin-top: 100px;
+}
+
+img {
+    width: 776px;
+}
+
+#login-header,
+#signup-header {
+    color: #3C4A93;
+    margin-bottom: 50px;
+    font-weight: bold;
+}
+
+.email-div {
+    padding-bottom: 30px;
+}
+
+.btn-primary {
+    width: 60%;
+    background-color: #FB6B46 !important;
+}
+
+.signupForm .form-control {
+    width: 80%;
+}
+
+.signup-option {
+    margin-top: 50px;
+}
+
+#signup-here {
+    color: #3C4A93;
+    font-weight: 700;
+    font-style: italic;
+}
+
+#login-here {
+    color: #FB6B46;
+    font-weight: 700;
+    font-style: oblique;
+}
+
+.auth-error {
+    color: red;
+    font-style: italic;
+    font-weight: bold;
+}
+
+[alt="design body"] {
+    height: 140%;
+}
+
+@media (max-width :767px) {
+    h1 {
+        text-align: center;
+    }
+    form {
+        padding: 30px;
+    }
+    .login-design,
+    .signup-design {
+        display: none;
+    }
+    .btn-primary {
+        margin-left: 20%;
+    }
+    .form-control {
+        width: 80%;
+    }
+    .signup-option,
+    .login-option {
+        text-align: center;
+    }
+}

@@ -63,7 +63,11 @@ const  DisplayImages = (props)=>{
                 
             }
             const download=(url, id)=>{
-                saveAs(url, id)
+                const arr = url.split("upload/");
+                const flag_attachment = 'fl_attachment/';
+                const newUrl = arr.join(`upload/${flag_attachment}`)
+                saveAs(newUrl, id)
+    
 
             }
 

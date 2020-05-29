@@ -64,14 +64,15 @@ class SignupForm extends Component{
             
             <div className = "row">
                 {/*  page design image */}
-                <div className= "col-md-6">
+                <div className= "signup-design col-md-6">
                     <img className = "img-fluid" src= {design} alt="design body"/>
                 </div>
 
                 {/* the actuall body of the page */}
-                <div className="col-md-6">
-                    <h1>CLOUDSHARE</h1>
+                <div className="signupForm col-md-6">
+                    <h1>AWPLODER</h1>
                     <form onSubmit= {this.onSubmit.bind(this)}>
+                        <h4 id = "signup-header">SIGN-UP</h4>
                          {/* email  */}
                         <div className="md-form">
                             <input 
@@ -109,7 +110,7 @@ class SignupForm extends Component{
                         }) }
                     </div>
                     <div className="login-option">
-                        <p> Have an account already? <Link to = "/login">Login instead</Link> </p>
+                        <p> Have an account already? <Link to = "/login"id = "login-here">Login instead</Link> </p>
                     </div>
                 </div>
             </div>    
