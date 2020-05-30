@@ -105,7 +105,7 @@ const optionPopover=(url, id)=>{
         if (getRawFiles){
             return getRawFiles.map(({id, url, size})=>{
                 return(
-                    <li key = {id}>
+                    <li key = {id} className = "document-list">
                         <a href={url} target="_blank" rel="noopener noreferrer"> {id} </a>
                        
 
@@ -131,13 +131,13 @@ const optionPopover=(url, id)=>{
                             onChange = {onChange}
                             type="file"  id="upload-file"/>
                          </span>
-        const loader = <span className = "imageInputLoader"><Loader type="TailSpin" color="#00BFFF" height={50} width={120} /></span> 
+        const loader = <span className = "imageInputLoader"><Loader type="TailSpin" color="#3C4A93" height={50} width={120} /></span> 
 
         return uploadMutationLoading ?  loader : inputFile
     }
     const showLoaderOrButtonInput=()=>{
         const inputFile = <input id = "first-input" type="file" onChange = {onChange}/>
-        const loader = <div className = "buttonInputLoader"><Loader type="TailSpin" color="#00BFFF" height={50} width={120} /></div>
+        const loader = <div className = "buttonInputLoader"><Loader type="TailSpin" color="#3C4A93" height={50} width={120} /></div>
 
         return uploadMutationLoading ?  loader : inputFile 
     }
@@ -147,14 +147,14 @@ const optionPopover=(url, id)=>{
         {showLoaderOrButtonInput()}
         <div className = "row">
             <div className="col-md-8">
-                <div className = "files">
+                <div className = "files shadow-lg">
                     <ul>
                         {displayRawFiles()}      
                     </ul>
                 </div>
             </div>
             <div className="col-md-4">
-                <div class="upload">
+                <div class="upload shadow">
                     
                     {showLoaderOrImageInput()}
                        

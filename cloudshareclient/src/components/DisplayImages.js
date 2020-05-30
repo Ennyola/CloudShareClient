@@ -115,7 +115,7 @@ const  DisplayImages = (props)=>{
                 if (getfiles){ 
                     return getfiles.map(({id, url, size})=>{
                         return(
-                            <li key = {id}>
+                            <li key = {id} className = "image-list">
                                 
                                 <a href={url} target="_blank" rel="noopener noreferrer" download > {id} </a>
                                 <span className="file-size">
@@ -133,22 +133,22 @@ const  DisplayImages = (props)=>{
                 const inputFile = <span>
                                     <label htmlFor="upload-file"> 
                                         <img src={uploadImage} alt="upload-image"/><br/>
-                                        <span> Click to upload a File </span>
+                                        <span> Click to upload File </span>
                                     </label>
                                     <input
                                     onChange = {onChange}
                                     type="file"  id="upload-file"/>
                                  </span>
-                const loader = <span className = "imageInputLoader"><Loader type="TailSpin" color="#00BFFF" height={50} width={120} /></span> 
+                const loader = <span className = "imageInputLoader"><Loader type="TailSpin" color="#3C4A93" height={50} width={120} /></span> 
 
                 return uploadMutationLoading ?  loader : inputFile
             }
 
             const showLoaderOrButtonInput=()=>{
                 const inputFile = <input id = "first-input" type="file" onChange = {onChange}/>
-                const loader = <div className = "buttonInputLoader"><Loader type="TailSpin" color="#00BFFF" height={50} width={120} /></div>
+                const loader = <div className = "buttonInputLoader"><Loader type="TailSpin" color="#3C4A93" height={50} width={120} /></div>
 
-                return uploadMutationLoading ?  loader : inputFile
+                return uploadMutationLoading ?    loader :inputFile 
             }
 
             return(
@@ -156,7 +156,7 @@ const  DisplayImages = (props)=>{
                     {showLoaderOrButtonInput()}
                     <div className="row">
                         <div className="col-md-8">
-                            <div className = "files">
+                            <div className = "files shadow-lg">
                                 <ul >
                                     {displayImages()}     
                                 </ul>
@@ -164,7 +164,7 @@ const  DisplayImages = (props)=>{
                         </div>
                         <div className="col-md-4">
                             
-                            <div className="upload">
+                            <div className="upload shadow">
                                     {showLoaderOrImageInput()}
                                 {uploadMutationError && <p>Error :( Please try again</p>}
                                 
