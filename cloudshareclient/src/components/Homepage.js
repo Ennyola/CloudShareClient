@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 
 import Header from './Header.js'
 import Sidebar from './Sidebar'
-import PageLinks from './PageLinks'
 import DisplayImages from './DisplayImages'
+
 import '../public/css/burger.css'
 
 class Homepage extends Component{

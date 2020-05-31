@@ -4,11 +4,14 @@ import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
 import query from '../queries/getLoggedInUser'
 import Loader from 'react-loader-spinner'
+import { MDBInput } from "mdbreact";
 
 
 
 import design from '../public/images/design.png'
+
 import '../public/css/authentication.css'
+
 
 
 class LoginForm extends Component{
@@ -31,8 +34,13 @@ class LoginForm extends Component{
 
     showSpinner(){
         if (this.state.loading){
-        return (<div className = "load-position" style = {{position :"absolute", top :'200px', left:"-10px", zIndex : 1}}> <Loader type="TailSpin" color="#3C4A93" height={80} width={80} /></div> )
-        }
+        return ( <div className = "overlay">
+                    <div className = "auth-loader"> 
+                    <Loader type="BallTriangle" color="rgb(255,255, 255)" height={80} width={80} />
+                    </div> 
+                </div>
+                )
+            }
          
     }
 
@@ -71,50 +79,51 @@ class LoginForm extends Component{
 
     render(){
         return(
-            <div className = "login-form container">
-                <div className = "row">
-                    <div className = "col-md-6">
-                    
-                        <h1>AWPLODER</h1>
+            <div>
+                {this.showSpinner()}
+                <div className = "login-form container">
+                    <div className = "row">
+                        <div className = "col-md-6">
                         
-                        {/* the actual form itself */}
-                        <div>
-                            <form onSubmit = {this.onSubmit.bind(this)}>
-                                <h4 id = "login-header">LOGIN</h4>
-
-                                <div className="md-form email-div">
-                                    <input 
-                                    value = {this.state.email}
-                                    onChange={(e)=>this.setState({email : e.target.value})}
-                                    id="materialLoginFormEmail" placeholder="Email Address" className="form-control" required/>
-                                </div>
-
-                                <div className="md-form password-div">
-                                    <input  
-                                    value = {this.state.password}
-                                    onChange={(e)=>this.setState({password : e.target.value})}
-                                    id="password" type = "password" placeholder="Password" className="form-control" required/>
-                                </div>
-                                {this.showSpinner()}
-                                <button type = "submit" className=  "btn btn-primary"> Login</button>
-                            </form>
-                            <div className = "auth-error">
-
+                            <h1>AWPLODER</h1>
                             
-                            {this.state.errors.map((error)=>{
-                               return( <div key= {error}>{error}</div>)
-                            })}
+                            {/* the actual form itself */}
+                            <div>
+                                <form onSubmit = {this.onSubmit.bind(this)} >
+                                    <h4 id = "login-header">LOGIN</h4>
+
+                                    <div className="email-div">
+                                        <MDBInput label="Email" value = {this.state.email} type = "email"
+                                        onChange={(e)=>this.setState({email : e.target.value})} required/>
+                                    </div>
+
+                                    <div className="password-div">
+                                        <MDBInput  
+                                        value = {this.state.password}
+                                        onChange={(e)=>this.setState({password : e.target.value})}
+                                        type = "password" label="Password" required/>
+                                    </div>
+                                
+                                    <button type = "submit" className=  "btn btn-primary"> Login</button>
+                                </form>
+                                <div className = "auth-error">
+
+                                
+                                {this.state.errors.map((error)=>{
+                                return( <div key= {error}>{error}</div>)
+                                })}
+                                </div>
+                            </div>
+
+                            <div className = "signup-option">
+                                <span>Don't have an account?</span>
+                                <Link to = "/signup" id = "signup-here"> Click here to create an account</Link>
                             </div>
                         </div>
 
-                        <div className = "signup-option">
-                            <span>Don't have an account?</span>
-                            <Link to = "/signup" id = "signup-here"> Click here to create an account</Link>
-                        </div>
+
+                        <div className = "col-md-6 login-design"> <img src={design} alt="design"/> </div>
                     </div>
-
-
-                    <div className = "col-md-6 login-design"> <img src={design} alt="design"/> </div>
                 </div>
             </div>
         

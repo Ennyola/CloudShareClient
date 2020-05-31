@@ -32,9 +32,10 @@ hr {
 #username {
     color: #3C4A93;
     font-weight: 800;
+    text-transform: uppercase;
 }
 
-[ alt="logo-image"] {
+[ alt="logo-img"] {
     width: 40px !important;
     height: 40px !important;
 }
@@ -165,7 +166,7 @@ label span {
     margin-left: 15px;
 }
 
-[alt="upload-image"] {
+[alt="upload-img"] {
     height: 60px !important;
     width: 60px !important;
 }

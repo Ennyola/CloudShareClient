@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import ApolloClient from "apollo-client";
 import { InMemoryCache} from 'apollo-cache-inmemory';
@@ -30,13 +30,11 @@ const DisplayAudiosPage = () => {
         client
     });
 
-    //audio file saved using react State
-    const [audio, setAudio] = useState(null)
 
     // onChange function for upload mutation
     function onChange({    target: {   validity,files: [file],},}) {
         if (validity.valid){
-            setAudio(file)
+           
             uploadAudio({ 
                 variables: { file, username: user },
                 refetchQueries:[{ 
@@ -127,7 +125,7 @@ const DisplayAudiosPage = () => {
         const showLoaderOrImageInput=()=>{
             const inputFile = <span>
                                 <label htmlFor="upload-file"> 
-                                    <img src={uploadImage} alt="upload-image"/><br/>
+                                    <img src={uploadImage} alt="upload-img"/><br/>
                                     <span> Click to upload a File </span>
                                 </label>
                                 <input

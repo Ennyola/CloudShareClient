@@ -5,6 +5,7 @@ import design from '../public/images/design.png'
 import { Link } from 'react-router-dom'
 import query from '../queries/getLoggedInUser'
 import Loader from 'react-loader-spinner'
+import { MDBInput } from "mdbreact";
 
 class SignupForm extends Component{
     
@@ -24,7 +25,12 @@ class SignupForm extends Component{
     }
     showSpinner(){
         if (this.state.loading){
-        return (<div className = "load-position" style = {{position :"absolute", top :'200px', left:"-10px", zIndex : -1}}> <Loader type="TailSpin" color="#3C4A93" height={80} width={80} /></div> )
+            return ( <div className = "overlay">
+                    <div className = "auth-loader"> 
+                    <Loader type="Bars" color="#ffffff" height={80} width={80} />
+                    </div> 
+                </div>
+                )
         }
          
     }
@@ -61,59 +67,61 @@ class SignupForm extends Component{
     render(){
         return(
 
-            
-            <div className = "row">
-                {/*  page design image */}
-                <div className= "signup-design col-md-6">
-                    <img className = "img-fluid" src= {design} alt="design body"/>
-                </div>
-
-                {/* the actuall body of the page */}
-                <div className="signupForm col-md-6">
-                    <h1>AWPLODER</h1>
-                    <form onSubmit= {this.onSubmit.bind(this)}>
-                        <h4 id = "signup-header">SIGN-UP</h4>
-                         {/* email  */}
-                        <div className="md-form">
-                            <input 
-                            value = {this.state.email}
-                            onChange = {e => this.setState({email:e.target.value})}
-                            type="email" name="email" className="form-control" placeholder="email" required/>
-                        </div>
-
-                        {/* username  */}
-                        <div className="md-form">
-                            <input 
-                            value = {this.state.username}
-                            onChange = {e => this.setState({username:e.target.value})}
-                            type="text" className="form-control" name="username" placeholder="username" required/>
-                        </div>
-
-                        <div className="md-form">
-                            <input 
-                            value = {this.state.password}
-                            onChange = {e => this.setState({password:e.target.value})}
-                            type="password" name="password" className="form-control" placeholder="Password" required/>
-                        </div>
-                        <div className="md-form">
-                            <input
-                            value = {this.state.rtPassword}
-                            onChange = {(e)=>this.setState({rtPassword:e.target.value})}
-                             type="password" name="vfpassword" className="form-control" placeholder="Verify Password" required/>
-                        </div>
-
-                        <button type="submit" className="btn btn-primary"> Submit</button>
-                    </form>
-                    <div className = "auth-error">
-                        { this.state.errors.map((error)=>{
-                        return <div key = {error}> {error} </div> 
-                        }) }
+            <div>
+                {this.showSpinner()}
+                <div className = "row">
+                    {/*  page design image */}
+                    <div className= "signup-design col-md-6">
+                        <img className = "img-fluid" src= {design} alt="design body"/>
                     </div>
-                    <div className="login-option">
-                        <p> Have an account already? <Link to = "/login"id = "login-here">Login instead</Link> </p>
+
+                    {/* the actuall body of the page */}
+                    <div className="signupForm col-md-6">
+                        <h1>AWPLODER</h1>
+                        <form onSubmit= {this.onSubmit.bind(this)}>
+                            <h4 id = "signup-header">SIGN-UP</h4>
+                            {/* email  */}
+                            
+                                <MDBInput 
+                                value = {this.state.email}
+                                onChange = {e => this.setState({email:e.target.value})}
+                                type="email" name="email" label="Email" required/>
+                            
+
+                            {/* username  */}
+                            
+                                <MDBInput 
+                                value = {this.state.username}
+                                onChange = {e => this.setState({username:e.target.value})}
+                                type="text" name="username" label="Username" required/>
+                            
+                                
+                            
+                                <MDBInput 
+                                value = {this.state.password}
+                                onChange = {e => this.setState({password:e.target.value})}
+                                type="password" name="password" label="Password" required/>
+                            
+                            
+                                <MDBInput
+                                value = {this.state.rtPassword}
+                                onChange = {(e)=>this.setState({rtPassword:e.target.value})}
+                                type="password" name="vfpassword" label="Verify Password" required/>
+                            
+
+                            <button type="submit" className="btn btn-primary"> Submit</button>
+                        </form>
+                        <div className = "auth-error">
+                            { this.state.errors.map((error)=>{
+                            return <div key = {error}> {error} </div> 
+                            }) }
+                        </div>
+                        <div className="login-option">
+                            <p> Have an account already? <Link to = "/login"id = "login-here">Login instead</Link> </p>
+                        </div>
                     </div>
-                </div>
-            </div>    
+                </div> 
+            </div>   
         )
     }
 }

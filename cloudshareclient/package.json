@@ -16,6 +16,7 @@
     "file-saver": "^2.0.2",
     "graphql": "^15.0.0",
     "graphql-tag": "^2.10.3",
+    "mdbreact": "^4.27.0",
     "react": "^16.13.1",
     "react-apollo": "^3.1.5",
     "react-awesome-popover": "^6.1.1",

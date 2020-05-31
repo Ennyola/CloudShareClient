@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 
 import Header from './Header'
 import Sidebar from './Sidebar'
-import PageLinks from './PageLinks'
+
 import DisplayVideos from './DisplayVideos'
 
 

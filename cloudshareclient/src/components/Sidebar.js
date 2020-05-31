@@ -1,9 +1,6 @@
 import React ,{ Component } from "react";
 import { scaleRotate as Menu } from 'react-burger-menu'
 import {Link} from 'react-router-dom'
-import recentFiles from '../public/images/recentfiles.png'
-import bin from '../public/images/bin.png'
-import star from '../public/images/star.png'
 
 class Sidebar extends Component{
 

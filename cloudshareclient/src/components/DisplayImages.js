@@ -1,4 +1,4 @@
-import React, {useState } from 'react'
+import React from 'react'
 import ApolloClient from "apollo-client";
 import { InMemoryCache} from 'apollo-cache-inmemory';
 import {useQuery, useMutation} from '@apollo/react-hooks'
@@ -36,12 +36,8 @@ const  DisplayImages = (props)=>{
             })
 
 
-            const [image, setImage] = useState()
-            const [isPopoverOpen, setPopoverOpen] = useState(false)
-
             function onChange({    target: {   validity,files: [file],},}) {
                 if (validity.valid){
-                    setImage(file)
                     mutate({ variables: { file, username: user },refetchQueries : [{
                         query : getImage,
                         variables : {username: user}
@@ -132,7 +128,7 @@ const  DisplayImages = (props)=>{
             const showLoaderOrImageInput=()=>{
                 const inputFile = <span>
                                     <label htmlFor="upload-file"> 
-                                        <img src={uploadImage} alt="upload-image"/><br/>
+                                        <img src={uploadImage} alt="upload-img"/><br/>
                                         <span> Click to upload File </span>
                                     </label>
                                     <input
@@ -205,17 +201,6 @@ mutation DeleteImage($url : String! ){
     }
   }
 `
-// const uploadMutation = gql`
-// mutation AddFile($file: Upload!, $username: String!) {
-//     uploadFile(file: $file, username: $username) {
-//       url
-//       id
-//       size
-//     }
-//   }
-
-// `
-
 
 
 export default DisplayImages

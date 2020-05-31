@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {useQuery, useMutation} from '@apollo/react-hooks'
 import ApolloClient from "apollo-client";
 import { InMemoryCache} from 'apollo-cache-inmemory';
@@ -25,10 +25,8 @@ const DisplayRawFiles = (props)=>{
     const [mutate, {loading: uploadMutationLoading, error: uploadMutationError}] = useMutation(uploadFileMutation,{
         client
     })
-    const [file, setFile] = useState(null)
     function onChange({    target: {   validity,files: [file],},}) {
         if (validity.valid){
-            setFile(file)
             mutate({ 
                 variables: { file, username: user },
                refetchQueries:[{ 
@@ -124,7 +122,7 @@ const optionPopover=(url, id)=>{
     const showLoaderOrImageInput=()=>{
         const inputFile = <span>
                             <label htmlFor="upload-file"> 
-                                <img src={uploadImage} alt="upload-image"/><br/>
+                                <img src={uploadImage} alt="upload-img"/><br/>
                                 <span> Click to upload a File </span>
                             </label>
                             <input

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {useQuery, useMutation} from '@apollo/react-hooks'
 import ApolloClient from "apollo-client";
 import { InMemoryCache} from 'apollo-cache-inmemory';
@@ -28,11 +28,9 @@ const DisplayVideos = ()=>{
             const [ deleteMutation] = useMutation(deleteVideoMutation, {
                 client
             });
-            const [video, setVideo] = useState(null)
 
             function onChange({    target: {   validity,files: [file],},}) {
-                if (validity.valid){
-                    setVideo(file)     
+                if (validity.valid){    
                     mutate({ 
                         variables: { file, username: user },
                         refetchQueries:[{ 
@@ -127,7 +125,7 @@ const DisplayVideos = ()=>{
         const showLoaderOrImageInput=()=>{
             const inputFile = <span>
                                 <label htmlFor="upload-file"> 
-                                    <img src={uploadImage} alt="upload-image"/><br/>
+                                    <img src={uploadImage} alt="upload-img"/><br/>
                                     <span> Click to upload a File </span>
                                 </label>
                                 <input

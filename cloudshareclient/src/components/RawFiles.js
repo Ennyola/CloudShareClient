@@ -3,7 +3,6 @@ import React, {Component} from 'react';
 
 import Header from './Header'
 import Sidebar from './Sidebar'
-import PageLinks from './PageLinks'
 import DisplayRawFiles from './DisplayRawFiles'
 
 class RawFiles extends Component{
