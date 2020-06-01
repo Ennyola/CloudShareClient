@@ -20,7 +20,7 @@ import requireAuth from './components/requireAuth'
 
 
 const link = createHttpLink({
-  uri: 'http://localhost:8000/graphiql/',
+  uri: 'https://awploder.herokuapp.com/graphiql/',
 })
 
 const authLink = setContext((_, { headers }) => {
