@@ -5,6 +5,7 @@ import Header from './Header'
 import Sidebar from './Sidebar'
 
 import DisplayVideos from './DisplayVideos'
+import Footer from './Footer'
 
 
 class Videos extends Component{
@@ -18,8 +19,8 @@ class Videos extends Component{
                     <Header/>
                     <div className = "upload-body ">
                         <DisplayVideos/>
-                        
                     </div>
+                    <Footer/>
                 </div>
             </div>
         

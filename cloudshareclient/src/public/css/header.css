@@ -55,34 +55,6 @@ hr {
 }
 
 
-/* .navigation {
-    padding: 60px;
-    margin-left: -30px;
-}
-
-.navigation li {
-    margin-left: 60px;
-    margin-right: -30px;
-    margin-top: 100px;
-    margin-bottom: 20px;
-}
-
-.navigation a {
-    font-family: Nunito;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 20px;
-    line-height: 25px;
-    color: #3C4A93;
-}
-
-.navigation a:hover {
-    font-size: 22px;
-    transition: 0.5s;
-    color: orange;
-} */
-
-
 /* Display image styles */
 
 .files {
@@ -213,10 +185,15 @@ label span {
     width: 150px;
     padding: 10px;
     padding-left: 2rem;
+    -webkit-user-select: none;
     outline: none;
     -webkit-user-select: none;
     cursor: pointer;
     text-shadow: 1px 1px #fff;
+}
+
+#first-input:active::before {
+    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
 }
 
 .load-position {
@@ -284,19 +261,16 @@ label span {
     margin-top: 10px;
 }
 
-
-/* .display-links i {
-    font-size: 20px;
-    cursor: pointer;
-}
-
-.display-links .fa-download {
-    color: #3C4A93;
-}
-
-.display-links .fa-trash {
+.uploadImage-error {
     color: red;
-} */
+    font-weight: bold;
+    text-align: center;
+}
+
+.uploadButton-error {
+    color: red;
+    font-weight: bold;
+}
 
 @media(max-width: 1000px) {
     #first-input {
@@ -342,5 +316,8 @@ label span {
     }
     .navbar-brand {
         padding-left: 50px;
+    }
+    .files {
+        margin-left: 0px;
     }
 }

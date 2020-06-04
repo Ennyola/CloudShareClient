@@ -7,6 +7,7 @@ import { saveAs } from 'file-saver';
 import {WhatsappShareButton, TwitterShareButton, WhatsappIcon, TwitterIcon} from 'react-share'
 import Loader from 'react-loader-spinner'
 import Popover from 'react-awesome-popover'
+import {withRouter} from 'react-router-dom'
 
 
 import getImage from '../queries/getImage'
@@ -38,10 +39,25 @@ const  DisplayImages = (props)=>{
 
             function onChange({    target: {   validity,files: [file],},}) {
                 if (validity.valid){
+                    const {type} = file
                     mutate({ variables: { file, username: user },refetchQueries : [{
                         query : getImage,
                         variables : {username: user}
                                 }],
+                    }).then(()=>{
+              
+                        if (type.startsWith("image")){
+                           props.history.push(`/${user}`)
+                        }
+                        else if(type.startsWith("audio")){
+                          props.history.push(`/${user}/audios`)
+                        }
+                        else if(type.startsWith("video")){
+                            props.history.push(`/${user}/videos`)
+                          }
+                        else{
+                            props.history.push(`/${user}/documents`)
+                        }
                     });
                 } 
              }
@@ -97,7 +113,7 @@ const  DisplayImages = (props)=>{
           <Popover className = "pop" arrow = {false} placement = "left-center">
               <i className="fas fa-ellipsis-v"></i>
               <div className = "options">
-                  <p onClick ={()=> {download(url, id)}}>Download</p>
+              <p onClick ={()=> {download(url, id)}}>Download</p>
                   {sharePopover(url)}
                   <p onClick ={()=> {onClick(url)}}>Delete</p>
               
@@ -150,6 +166,7 @@ const  DisplayImages = (props)=>{
             return(
                 <div className = "container">
                     {showLoaderOrButtonInput()}
+                    {uploadMutationError && <p className = "uploadButton-error">Error :( Please try again</p>} 
                     <div className="row">
                         <div className="col-md-8">
                             <div className = "files shadow-lg">
@@ -162,22 +179,14 @@ const  DisplayImages = (props)=>{
                             
                             <div className="upload shadow">
                                     {showLoaderOrImageInput()}
-                                {uploadMutationError && <p>Error :( Please try again</p>}
-                                
+                                {uploadMutationError && <p className = "uploadImage-error">Error :( Please try again</p>}       
                             </div>
-                        </div>
-                        
+                        </div>    
                     </div>
                 </div>
              )
             
         }       
-     
-
-// const link = new createHttpLink({
-//     uri: 'http://127.0.0.1:4000/graphiql/'
-// })
-
 const link = createUploadLink({
     uri: 'http://127.0.0.1:4000/graphiql/'
 })
@@ -203,4 +212,4 @@ mutation DeleteImage($url : String! ){
 `
 
 
-export default DisplayImages
+export default withRouter(DisplayImages)

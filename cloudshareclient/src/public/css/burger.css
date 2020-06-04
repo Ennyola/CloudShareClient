@@ -50,7 +50,7 @@
 /* General sidebar styles */
 
 .bm-menu {
-    background: #3C4A93;
+    background: #181325;
     padding: 2.5em 1.5em 0;
     font-size: 1.15em;
 }
@@ -77,8 +77,9 @@
     display: inline-block;
     color: white;
     margin-top: 40px;
-    margin-left: 30px;
+    /* margin-left: 30px; */
     outline: none;
+    text-align: center;
 }
 
 .bm-item:hover {
@@ -95,12 +96,10 @@
 
 .menu-item .fas {
     font-size: 45px;
-    padding-left: 45px;
 }
 
 .sideLinks {
-    padding: 45px;
-    padding-top: 50px;
+    display: block;
 }
 
 .message {

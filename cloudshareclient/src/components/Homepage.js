@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import Header from './Header.js'
 import Sidebar from './Sidebar'
 import DisplayImages from './DisplayImages'
+import Footer from './Footer'
 
 import '../public/css/burger.css'
 
@@ -16,9 +17,9 @@ class Homepage extends Component{
                 <div id = "page-wrap">
                     <Header/>
                     <div className = "upload-body ">
-                        {/* <PageLinks/> */}
                         <DisplayImages/>
                     </div>
+                    <Footer/>
                 </div>
             </div>
         )

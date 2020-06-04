@@ -1,0 +1,156 @@
+.landing {
+    height: 100vh;
+    /* background-color: rgb(60, 74, 147); */
+    /* background-color: #100e17; */
+}
+
+.landing-intro {
+    background-color: #181325;
+    height: 100vh;
+}
+
+.landing img {
+    width: 450px !important;
+    height: 100% !important;
+    border-radius: 20px;
+    margin-top: 56px;
+    margin-left: 30px;
+}
+
+.login-or-signup {
+    margin-right: 30px;
+}
+
+.goto-login {
+    background-color: #FB6B46;
+    color: white;
+}
+
+.goto-login:hover {
+    color: white;
+    background-color: #181325;
+}
+
+.goto-signup:hover {
+    background-color: white !important;
+}
+
+.landing-body {
+    display: flex;
+    justify-content: center;
+}
+
+.landing .welcome-text {
+    font-weight: 300;
+    margin-top: 130px;
+    margin-left: 65px;
+    color: white;
+}
+
+.landing .site-name {
+    color: #FB6B46;
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.description {
+    font-style: italic;
+    animation-delay: 2s;
+}
+
+.get-started {
+    font-weight: bold;
+    font-style: oblique;
+    animation-delay: 3s;
+}
+
+.get-started:hover {
+    color: #181325 !important;
+    background-color: #FB6B46 !important;
+}
+
+#hit-header {
+    font-weight: bold;
+    color: #181325;
+    text-align: center;
+    margin-top: 30px;
+    padding-bottom: 50px;
+}
+
+.how-it-works {
+    padding-top: 89px;
+    padding-bottom: 80px;
+}
+
+.how-it-works .fas {
+    color: skyblue;
+}
+
+.footer {
+    background-color: #181325;
+    height: 150px;
+    padding-top: 34px;
+    width: 100%;
+}
+
+.footer .copyright {
+    color: white;
+    margin-top: 25px;
+}
+
+.wt-header {
+    animation-delay: 0.8s;
+}
+
+#hit-link {
+    color: white;
+    font-style: italic;
+}
+
+.landing-intro .fas {
+    position: absolute;
+    color: white;
+    font-size: 40px;
+    /* margin-top: 45px; */
+    top: 90%;
+    left: 50%;
+}
+
+.go-down {
+    animation-iteration-count: infinite;
+}
+
+@media (max-width:455px) {
+    .landing img {
+        display: none;
+    }
+    .landing-body {
+        display: inline-block;
+    }
+    .landing .welcome-text {
+        margin-left: 112px;
+    }
+    .description {
+        margin-top: 45px;
+        margin-left: -30px;
+    }
+    .get-started {
+        margin-left: 30px;
+    }
+    .wt-header {
+        margin-left: 10px;
+    }
+}
+
+@media (max-width:410px) {
+    .description {
+        margin-top: 45px;
+        margin-left: -50px;
+    }
+    .get-started {
+        margin-left: 20px;
+    }
+    .wt-header {
+        margin-left: -2px;
+    }
+}

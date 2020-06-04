@@ -4,6 +4,7 @@ import React, {Component} from 'react';
 import Header from './Header'
 import Sidebar from './Sidebar'
 import DisplayRawFiles from './DisplayRawFiles'
+import Footer from './Footer'
 
 class RawFiles extends Component{
     render(){
@@ -15,9 +16,9 @@ class RawFiles extends Component{
                 <div id = "page-wrap">
                     <Header/>
                     <div className = "upload-body ">
-                        {/* <PageLinks/> */}
                         <DisplayRawFiles/>
                     </div>
+                    <Footer/>
                 </div>
             </div>
         

@@ -7,6 +7,7 @@ import { saveAs } from 'file-saver';
 import {WhatsappShareButton, TwitterShareButton, WhatsappIcon, TwitterIcon} from 'react-share'
 import Loader from 'react-loader-spinner'
 import Popover from 'react-awesome-popover'
+import {withRouter} from 'react-router-dom'
 
 import deleteAudioMutation from '../mutations/deleteAudioMutation'
 import uploadFileMutation from '../mutations/uploadFileMutation'
@@ -14,7 +15,8 @@ import getAudioQuery from '../queries/getAudio'
 import uploadImage from '../public/images/upload.png'
 
 
-const DisplayAudiosPage = () => {
+
+const DisplayAudiosPage = (props) => {
 
     const user = localStorage.getItem('username')
 
@@ -30,10 +32,10 @@ const DisplayAudiosPage = () => {
         client
     });
 
-
     // onChange function for upload mutation
     function onChange({    target: {   validity,files: [file],},}) {
         if (validity.valid){
+            const { type  } = file            
            
             uploadAudio({ 
                 variables: { file, username: user },
@@ -42,6 +44,20 @@ const DisplayAudiosPage = () => {
                     variables : { username : user }
                 
                 }]
+            }).then(()=>{
+              
+                if (type.startsWith("image")){
+                   props.history.push(`/${user}`)
+                }
+                else if(type.startsWith("audio")){
+                  props.history.push(`/${user}/audios`)
+                }
+                else if(type.startsWith("video")){
+                    props.history.push(`/${user}/videos`)
+                  }
+                else{
+                    props.history.push(`/${user}/documents`)
+                }
             })
         } 
      }
@@ -126,7 +142,7 @@ const DisplayAudiosPage = () => {
             const inputFile = <span>
                                 <label htmlFor="upload-file"> 
                                     <img src={uploadImage} alt="upload-img"/><br/>
-                                    <span> Click to upload a File </span>
+                                    <span> Click to upload File </span>
                                 </label>
                                 <input
                                 onChange = {onChange}
@@ -146,30 +162,26 @@ const DisplayAudiosPage = () => {
 
     return(
             <div className = "container">
-            {showLoaderOrButtonInput()}
-            <div className = "row">
-                <div className="col-md-8">
-                    <div className = "files shadow-lg">
-                        <ul>
-                            {displayAudios()}      
-                        </ul>
+                {showLoaderOrButtonInput()}
+                {uploadMutationError && <p className = "uploadButton-error">Error :( Please try again</p>} 
+                <div className = "row">
+                    <div className="col-md-8">
+                        <div className = "files shadow-lg">
+                            <ul>
+                                {displayAudios()}      
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                <div className="col-md-4">
-                    
-                    <div class="upload shadow">
-                            {showLoaderOrImageInput()}
-                    
-                        {uploadMutationError && <p>Error :( Please try again</p>}
+                    <div className="col-md-4">
+                        
+                        <div className="upload shadow">
+                                {showLoaderOrImageInput()}
+                                {uploadMutationError && <p className = "uploadImage-error">Error :( Please try again</p>}
+                        </div>
                     </div>
                  </div>
-
-        </div>
-        </div>
-             
-        
+            </div>  
     )
-
 }
 
 const link = createUploadLink({
@@ -181,4 +193,4 @@ const client = new ApolloClient({
         dataIdFromObject: object => object.id
     })
 })
-export default DisplayAudiosPage
+export default withRouter(DisplayAudiosPage)

@@ -2,7 +2,7 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import React from 'react';
 import {ApolloClient} from 'apollo-client'
 import { ApolloProvider } from 'react-apollo'
-import { Route, BrowserRouter} from 'react-router-dom'
+import { Route, BrowserRouter, Switch} from 'react-router-dom'
 import { createHttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { setContext } from 'apollo-link-context'
@@ -17,6 +17,7 @@ import VideosPage from './components/Videos'
 import AudiosPage from './components/Audios'
 import RawFiles from './components/RawFiles'
 import requireAuth from './components/requireAuth'
+import LandingPage from './components/LandingPage'
 
 
 const link = createHttpLink({
@@ -49,13 +50,20 @@ function App() {
     <ApolloProvider client = { client }>
       
       <BrowserRouter>
-          <Route path = "/login" exact  component = {LoginForm} />
-          <Route path = "/signup" exact  component = {SignupForm} />
-          <Route path = "/homepage/:username" exact  component = {requireAuth(Homepage)} />
-          <Route path = "/homepage/:username/images" exact  component = {requireAuth(Homepage)} />
-          <Route path = "/homepage/:username/videos" exact  component = {requireAuth(VideosPage)}/>
-          <Route path = "/homepage/:username/audios" exact  component = {requireAuth(AudiosPage)}/>
-          <Route path = "/homepage/:username/documents" exact  component = {requireAuth(RawFiles)}/>
+         
+          <Switch>
+            <Route path = "/login"   component = {LoginForm} />
+            <Route path = "/signup"   component = {SignupForm} />
+            <Route path = "/:username/images"   component = {requireAuth(Homepage)} />
+            <Route path = "/:username/videos"   component = {requireAuth(VideosPage)}/>
+            <Route path = "/:username/audios"   component = {requireAuth(AudiosPage)}/>
+            <Route path = "/:username/documents"   component = {requireAuth(RawFiles)}/>
+            <Route path = "/:username"   component = {requireAuth(Homepage)} />
+            <Route path = "/"  component = {LandingPage}/> 
+          </Switch>
+          
+        
+          
       </BrowserRouter>
 
       

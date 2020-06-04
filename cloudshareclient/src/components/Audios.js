@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import Header from './Header'
 import Sidebar from './Sidebar'
 import DisplaAudios from './DisplayAudios'
+import Footer from './Footer'
 
 
 class Audios extends Component{
@@ -15,10 +16,9 @@ class Audios extends Component{
                 <div id = "page-wrap">
                     <Header/>
                     <div className = "upload-body ">
-                        {/* <PageLinks/> */}
-                            <DisplaAudios/>
-                        
+                            <DisplaAudios/>  
                     </div>
+                    <Footer/>
                 </div>
             </div>
         

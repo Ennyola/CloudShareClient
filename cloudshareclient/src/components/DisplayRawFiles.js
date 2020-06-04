@@ -7,6 +7,7 @@ import { saveAs } from 'file-saver';
 import {WhatsappShareButton, TwitterShareButton, WhatsappIcon, TwitterIcon} from 'react-share'
 import Loader from 'react-loader-spinner'
 import Popover from 'react-awesome-popover'
+import {withRouter} from 'react-router-dom'
 
 import query from '../queries/getRawFile'
 import uploadFileMutation from '../mutations/uploadFileMutation'
@@ -27,6 +28,7 @@ const DisplayRawFiles = (props)=>{
     })
     function onChange({    target: {   validity,files: [file],},}) {
         if (validity.valid){
+            const {type} = file
             mutate({ 
                 variables: { file, username: user },
                refetchQueries:[{ 
@@ -34,6 +36,19 @@ const DisplayRawFiles = (props)=>{
                    variables : { username : user }
                
                }]
+           }).then(()=>{
+            if (type.startsWith("image")){
+                props.history.push(`/${user}`)
+             }
+             else if(type.startsWith("audio")){
+               props.history.push(`/${user}/audios`)
+             }
+             else if(type.startsWith("video")){
+                 props.history.push(`/${user}/videos`)
+               }
+             else{
+                 props.history.push(`/${user}/documents`)
+             }
            }) 
         } 
      }
@@ -123,7 +138,7 @@ const optionPopover=(url, id)=>{
         const inputFile = <span>
                             <label htmlFor="upload-file"> 
                                 <img src={uploadImage} alt="upload-img"/><br/>
-                                <span> Click to upload a File </span>
+                                <span> Click to upload File </span>
                             </label>
                             <input
                             onChange = {onChange}
@@ -142,23 +157,24 @@ const optionPopover=(url, id)=>{
     
     return(
         <div className = "container">
-        {showLoaderOrButtonInput()}
-        <div className = "row">
-            <div className="col-md-8">
-                <div className = "files shadow-lg">
-                    <ul>
-                        {displayRawFiles()}      
-                    </ul>
+            {showLoaderOrButtonInput()}
+            <div className = "row">
+                <div className="col-md-8">
+                    <div className = "files shadow-lg">
+                        <ul>
+                            {displayRawFiles()}
+                            {uploadMutationError && <p className = "uploadButton-error">Error :( Please try again</p>}       
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <div className="col-md-4">
-                <div class="upload shadow">
-                    
-                    {showLoaderOrImageInput()}
-                       
-                    {uploadMutationError && <p>Error :( Please try again</p>}
+                <div className="col-md-4">
+                    <div className="upload shadow">
+                        
+                        {showLoaderOrImageInput()}
+                        
+                        {uploadMutationError && <p className = "uploadImage-error">Error :( Please try again</p>}
+                    </div>
                 </div>
-            </div>
             </div>
         </div>
     )
@@ -175,4 +191,4 @@ const client = new ApolloClient({
 })
 
 
-export default DisplayRawFiles
+export default withRouter(DisplayRawFiles)

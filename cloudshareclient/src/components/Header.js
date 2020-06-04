@@ -10,7 +10,7 @@ class Header extends Component{
     render(){
       const username = localStorage.getItem('username')
         return(
-            <div className = "header shadow" >
+            <div className = "header shadow-sm" >
                     <Link className = "navbar-brand" to = {`/homepage/${username}`}>
                         <img src={ bookImage } alt="logo-img"/>
                         <span className="platform">  AWPLODER  </span>

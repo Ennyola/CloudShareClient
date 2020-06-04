@@ -1,6 +1,6 @@
 import React ,{ Component } from "react";
 import { scaleRotate as Menu } from 'react-burger-menu'
-import {Link} from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
 
 class Sidebar extends Component{
 
@@ -8,7 +8,7 @@ class Sidebar extends Component{
     onLogoutClick(){
       localStorage.clear()
       //pure javascript function to reload a page
-      window.location.reload(true);
+      this.props.history.push('/')
       
   }
   colouredImage(){
@@ -39,16 +39,16 @@ class Sidebar extends Component{
           <div className = "message">
            <span className = "hello"> Hello </span>  {username}!
           </div>
-          <Link  to ={{ pathname: `/homepage/${username}/images`}}  className="menu-item" >
+          <Link  to ={{ pathname: `/${username}/images`}}  className="menu-item" >
            {this.colouredImage()}
           </Link>
-          <Link to = {{ pathname: `/homepage/${username}/videos`}}  className="menu-item" >
+          <Link to = {{ pathname: `/${username}/videos`}}  className="menu-item" >
             {this.colouredVideo()}
           </Link>
-          <Link to ={{ pathname: `/homepage/${username}/audios`}}  className="menu-item" >
+          <Link to ={{ pathname: `/${username}/audios`}}  className="menu-item" >
            {this.colouredAudio()}
           </Link>
-          <Link to ={{ pathname: `/homepage/${username}/documents`}} className="menu-item"> 
+          <Link to ={{ pathname: `/${username}/documents`}} className="menu-item"> 
            {this.colouredDocument()}
           </Link>
 
@@ -58,4 +58,4 @@ class Sidebar extends Component{
     }
 }
 
-export default Sidebar
+export default withRouter(Sidebar)

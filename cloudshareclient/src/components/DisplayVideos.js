@@ -7,6 +7,7 @@ import { saveAs } from 'file-saver';
 import {WhatsappShareButton, TwitterShareButton, WhatsappIcon, TwitterIcon} from 'react-share'
 import Loader from 'react-loader-spinner'
 import Popover from 'react-awesome-popover'
+import {withRouter} from 'react-router-dom'
 
 import deleteVideoMutation from '../mutations/deleteVideoMutation'
  import uploadFileMutation from '../mutations/uploadFileMutation'
@@ -14,7 +15,7 @@ import getVideosQuery from '../queries/getVideos'
 import uploadImage from '../public/images/upload.png'
 
 
-const DisplayVideos = ()=>{
+const DisplayVideos = (props)=>{
 
             const user = localStorage.getItem('username')
             // to get the list of videos from the db
@@ -30,7 +31,8 @@ const DisplayVideos = ()=>{
             });
 
             function onChange({    target: {   validity,files: [file],},}) {
-                if (validity.valid){    
+                if (validity.valid){  
+                    const {type} = file  
                     mutate({ 
                         variables: { file, username: user },
                         refetchQueries:[{ 
@@ -38,6 +40,19 @@ const DisplayVideos = ()=>{
                             variables : { username : user }
                         
                         }]
+                    }).then(()=>{
+                        if (type.startsWith("image")){
+                            props.history.push(`/${user}`)
+                         }
+                         else if(type.startsWith("audio")){
+                           props.history.push(`/${user}/audios`)
+                         }
+                         else if(type.startsWith("video")){
+                             props.history.push(`/${user}/videos`)
+                           }
+                         else{
+                             props.history.push(`/${user}/documents`)
+                         }
                     })
                 } 
              }
@@ -126,7 +141,7 @@ const DisplayVideos = ()=>{
             const inputFile = <span>
                                 <label htmlFor="upload-file"> 
                                     <img src={uploadImage} alt="upload-img"/><br/>
-                                    <span> Click to upload a File </span>
+                                    <span> Click to upload File </span>
                                 </label>
                                 <input
                                 onChange = {onChange}
@@ -145,23 +160,24 @@ const DisplayVideos = ()=>{
 
     return(
             <div className = "container">
-            {showLoaderOrButtonInput()}
-            <div className = "row">
-                <div className="col-md-8">
-                    <div className = "files shadow-lg">
-                        <ul>
-                            {displayVideos()}      
-                        </ul>
+                {showLoaderOrButtonInput()}
+                {uploadMutationError && <p className = "uploadButton-error">Error :( Please try again</p>} 
+                <div className = "row">
+                    <div className="col-md-8">
+                        <div className = "files shadow-lg">
+                            <ul>
+                                {displayVideos()}      
+                            </ul>
+                        </div>
+                    </div>
+                    <div className="col-md-4">
+                
+                        <div className="upload shadow">     
+                            {showLoaderOrImageInput()}
+                            {uploadMutationError && <p className = "uploadImage-error">Error :( Please try again</p>}
+                        </div>
                     </div>
                 </div>
-                <div className="col-md-4">
-              
-                    <div className="upload shadow">     
-                           {showLoaderOrImageInput()}
-                        {uploadMutationError && <p>Error :( Please try again</p>}
-                    </div>
-                </div>
-            </div>
             </div>
                
         
@@ -180,4 +196,4 @@ const client = new ApolloClient({
     })
 })
 
-export default DisplayVideos
+export default withRouter(DisplayVideos)

@@ -20,7 +20,7 @@ class SignupForm extends Component{
         if(user){
             const { username } = user
             localStorage.setItem('username', username)
-            this.props.history.push(`/homepage/${username}`)
+            this.props.history.push(`/${username}`)
         }
     }
     showSpinner(){
