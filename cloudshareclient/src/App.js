@@ -21,7 +21,7 @@ import LandingPage from './components/LandingPage'
 
 
 const link = createHttpLink({
-  uri: 'https://awploder.herokuapp.com/graphiql/',
+  uri: 'https://awploder-auth.herokuapp.com/graphiql/',
 })
 
 const authLink = setContext((_, { headers }) => {
