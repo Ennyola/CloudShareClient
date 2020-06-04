@@ -1,10 +1,10 @@
 .landing {
     height: 100vh;
-    /* background-color: rgb(60, 74, 147); */
-    /* background-color: #100e17; */
+    overflow-x: hidden;
 }
 
 .landing-intro {
+    position: relative;
     background-color: #181325;
     height: 100vh;
 }
@@ -73,12 +73,13 @@
     font-weight: bold;
     color: #181325;
     text-align: center;
-    margin-top: 30px;
-    padding-bottom: 50px;
+    margin-top: 0px;
+    padding-bottom: 30px;
+    margin-left: -10px;
 }
 
 .how-it-works {
-    padding-top: 89px;
+    padding-top: 80px;
     padding-bottom: 80px;
 }
 
@@ -108,16 +109,27 @@
 }
 
 .landing-intro .fas {
-    position: absolute;
     color: white;
-    font-size: 40px;
-    /* margin-top: 45px; */
-    top: 90%;
-    left: 50%;
 }
 
 .go-down {
     animation-iteration-count: infinite;
+    position: absolute;
+    font-size: 40px;
+    top: 90%;
+    left: 50%;
+}
+
+.explanation-header {
+    margin-top: 34px;
+    font-weight: 400;
+    font-size: 35px;
+}
+
+.explanation {
+    font-weight: 400;
+    font-size: 18px;
+    margin-top: 30px;
 }
 
 @media (max-width:455px) {
