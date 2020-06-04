@@ -181,7 +181,7 @@ const optionPopover=(url, id)=>{
 }
 
 const link = createUploadLink({
-    uri: 'http://127.0.0.1:4000/graphiql/'
+    uri: 'https://awploder-uploadservice.herokuapp.com/graphiql'
 })
 const client = new ApolloClient({
     link,
