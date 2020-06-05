@@ -33,7 +33,7 @@ class LandingPage extends Component{
                             <div className="row">
                                 <div className="col-md-4">
                                     <h3 className = "text-center explanation-header"> UPLOAD <i className="fas fa-cloud-upload-alt"></i></h3>
-                                    <p className = "explanation">Have A file you want to save, our Optimised Algorithm Ensures you do that in a single click. We Support file Uploads Ranging from PNG,JPG, MP3,MP4, MPEG,GIF, PDF To Raw files like .txt, .env and so on. </p> 
+                                    <p className = "explanation">Have A file you want to save, our Optimised Algorithm Ensures you do that in a single click. We Support file Uploads Ranging from PNG,JPG, MP3,MP4, MPEG,GIF, PDF To Raw files like .txt, .csv, .env and so on. </p> 
                                 </div>
                                 <div className="col-md-4"> 
                                     <h3 className = "text-center explanation-header"> DOWNLOAD <i className="fas fa-cloud-download-alt"></i></h3>
