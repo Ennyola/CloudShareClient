@@ -54,7 +54,6 @@
 }
 
 .description {
-    font-style: italic;
     animation-delay: 2s;
 }
 
@@ -123,12 +122,12 @@
 .explanation-header {
     margin-top: 34px;
     font-weight: 400;
-    font-size: 30px;
+    font-size: 28px;
 }
 
 .explanation {
     font-weight: 400;
-    font-size: 18px;
+    font-size: 16px;
     margin-top: 30px;
 }
 
@@ -140,6 +139,7 @@
         display: inline-block;
     }
     .landing .welcome-text {
+        position: relative;
         margin-left: 112px;
     }
     .description {
@@ -148,21 +148,49 @@
     }
     .get-started {
         margin-left: 30px;
+        margin-top: 130px;
     }
     .wt-header {
+        margin-top: -40px;
         margin-left: 10px;
+    }
+    .go-down {
+        display: none;
     }
 }
 
-@media (max-width:410px) {
-    .description {
-        margin-top: 45px;
-        margin-left: -50px;
+@media (min-width: 400px) and (max-width: 423px) {
+    .wt-header {
+        margin-left: -5%;
     }
     .get-started {
-        margin-left: 20px;
+        margin-left: 10px;
     }
+    .description {
+        margin-left: -40px;
+    }
+}
+
+@media (min-width:355px) and (max-width: 399px) {
     .wt-header {
-        margin-left: -2px;
+        margin-left: -15%;
+    }
+    .get-started {
+        margin-left: -6%;
+    }
+    .description {
+        margin-left: -65px;
+    }
+}
+
+@media(max-width: 354px) {
+    .wt-header {
+        margin-left: -23%;
+    }
+    .get-started {
+        margin-left: -13%;
+    }
+    .description {
+        margin-left: -85px;
     }
 }

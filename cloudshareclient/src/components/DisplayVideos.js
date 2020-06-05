@@ -6,8 +6,8 @@ import { createUploadLink } from 'apollo-upload-client'
 import { saveAs } from 'file-saver';
 import {WhatsappShareButton, TwitterShareButton, WhatsappIcon, TwitterIcon} from 'react-share'
 import Loader from 'react-loader-spinner'
-import Popover from 'react-awesome-popover'
 import {withRouter} from 'react-router-dom'
+import {MDBPopover} from 'mdbreact'
 
 import deleteVideoMutation from '../mutations/deleteVideoMutation'
  import uploadFileMutation from '../mutations/uploadFileMutation'
@@ -83,47 +83,63 @@ const DisplayVideos = (props)=>{
    
 
     if (queryLoading) return (<div className = "load-position"> <Loader type="TailSpin" color="#3C4A93" height={80} width={80} /></div> )
-    if (queryError) return (<div className = "fetch-error"> <h4> Error :(  ...There seems to be an error getting your Files. Please reload </h4></div>)
+    if (queryError) return (<div className = "fetch-error">  Error :(  ...There seems to be an error getting your Files. Please reload</div>)
 
     const {queryVideos} = data
     
-            const sharePopover = (url)=>{
-                return(  
-                        <Popover placement = "right-center">
-                            <p>Share</p>
-                            <div className = "share" arrow = {false}>
-                                <WhatsappShareButton url = {url}   >
-                                    <WhatsappIcon size={28} round={true} className = "share-icons"/>
-                                </WhatsappShareButton>
-                                <TwitterShareButton url = {url} title= {"Check out this link"} via={"AWPLODER"}>
-                                    <TwitterIcon size={28} round={true} className = "share-icons"/>
-                                </TwitterShareButton>
-                        </div>
-                        </Popover>
-                    )
-        }
+                const sharePopover = (url)=>{
+                    return(  
+                            <MDBPopover
+                                placement = "left"
+                                popover
+                                clickable
+                                domElement
+                                id="popper2"
+                                >
+                                    <p>Share</p>
+                                    <div className = "share"   >
+                                        <WhatsappShareButton url = {url}>
+                                            <WhatsappIcon size={28} round={true} className = "share-icons"/>
+                                        </WhatsappShareButton>
+                                        <TwitterShareButton url = {url} title= {"Check out this link"} via={"Awploder"}>
+                                            <TwitterIcon size={28} round={true} className = "share-icons"/>
+                                        </TwitterShareButton>
+                                    </div>
+                            </MDBPopover>
+                            
+                        )
+            }
 
             const optionPopover=(url, id)=>{
             return(
-            <Popover className = "pop" arrow = {false} placement = "left-center">
-                <i className="fas fa-ellipsis-v"></i>
-                <div className = "options">
-                    <p onClick ={()=> {download(url, id)}}>Download</p>
-                    {sharePopover(url)}
-                    <p onClick ={()=> {onClick(url)}}>Delete</p>         
-                </div>
-            </Popover>
+                    <MDBPopover
+                        placement = "top"
+                        popover
+                        clickable
+                        domElement
+                        id="popper1"
+                    >
+                    <i className="fas fa-ellipsis-v"></i>
+                        <div className = "options">
+                        <p onClick ={()=> {download(url, id)}}>Download</p>
+                        <hr/>
+                            {sharePopover(url)}
+                            <hr/>
+                            <p onClick ={()=> {onClick(url)}}>Delete</p>
+                        
+                        </div>
+
+                    </MDBPopover>
             )
 
-            }
-            
+            }  
             
             const displayVideos = ()=>{
                 if (queryVideos){ 
                     return queryVideos.map(({id, url, size})=>{
                         return(
                             <li key = {id} className = "video-list">
-                                <a href={url} target="_blank" rel="noopener noreferrer"> {id} </a>
+                                <a href={url} className = "file-link" target="_blank" rel="noopener noreferrer"> {id} </a>
                                   
                                 <span className="file-size">
                                     {size}
@@ -187,7 +203,8 @@ const DisplayVideos = (props)=>{
 
 
 const link = createUploadLink({
-    uri: 'https://awploder-uploadservice.herokuapp.com/graphiql'
+     uri: 'https://awploder-uploadservice.herokuapp.com/graphiql'
+
 })
 const client = new ApolloClient({
     link,

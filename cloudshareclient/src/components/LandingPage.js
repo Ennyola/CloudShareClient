@@ -25,7 +25,7 @@ class LandingPage extends Component{
                                 <Link to = "/login" className = " animated animate__backInUp get-started btn btn-outline-deep-orange wave-effect">GET STARTED</Link>
                             </div> 
                         </div>
-                        <a href="#hit" className = "animated animate__bounceIn go-down" ><i className="fas fa-angle-down"></i></a>
+                         <a href="#hit" className = "animated animate__bounceIn go-down" ><i className="fas fa-angle-down"></i></a> 
                     </div>
                     <div className = "how-it-works" id = "hit">
                         <h2 id = "hit-header"> HOW IT WORKS</h2>
