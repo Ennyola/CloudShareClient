@@ -5,6 +5,8 @@ import { graphql } from 'react-apollo'
 import query from '../queries/getLoggedInUser'
 import Loader from 'react-loader-spinner'
 import { MDBInput } from "mdbreact";
+import * as EmailValidator from 'email-validator';
+ 
 
 
 
@@ -53,27 +55,32 @@ class LoginForm extends Component{
         const _saveUserData = (token) => {
             localStorage.setItem('token', token)
         }
-        
 
-        this.props.mutate({
-            variables :{ 
-                username : this.state.email,
-                password : this.state.password
-            }
-            
-        }).then((data)=>{
-            this.props.data.refetch()
-            const { token} = data.data.tokenAuth
-            _saveUserData(token)   
-        })
-        .catch((res)=>{
-            const errors = res.graphQLErrors.map((error)=>{
-               return error.message
+        if (!EmailValidator.validate(this.state.email)){
+            this.setState({errors:["Please use a valid Email address"], loading:false })
+
+        }
+        else{
+            this.props.mutate({
+                variables :{ 
+                    username : this.state.email,
+                    password : this.state.password
+                }
+                
+            }).then((data)=>{
+                this.props.data.refetch()
+                const { token} = data.data.tokenAuth
+                _saveUserData(token)   
             })
-            this.setState({errors, email : "", password : "", loading: false})
-            
+            .catch((res)=>{
+                const errors = res.graphQLErrors.map((error)=>{
+                return error.message
+                })
+                this.setState({errors, email : "", password : "", loading: false})
+                
 
-        })
+            })
+        }
 
     }
 

@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import query from '../queries/getLoggedInUser'
 import Loader from 'react-loader-spinner'
 import { MDBInput } from "mdbreact";
+import * as EmailValidator from 'email-validator';
 
 class SignupForm extends Component{
     
@@ -40,6 +41,9 @@ class SignupForm extends Component{
         this.setState({loading:true})
         if(this.state.password !== this.state.rtPassword){
             this.setState({errors:["Passwords do not match"], loading:false})
+        }
+        else if(!EmailValidator.validate(this.state.email)){
+            this.setState({errors:["Please use a valid Email address"], loading:false })
         }
         else{        
                 this.props.mutate({
