@@ -7,7 +7,7 @@ class Footer extends Component{
                 <div className = "text-center">
                     <a href="https://medunoyeeni@gmail.com" target = "_blank" rel="noopener noreferrer">Contact Support</a>
                 </div>
-                <p className = "copyright text-center"> © 2020 COPYRIGHT AWPLODER</p>
+                <p className = "copyright text-center"> © {new Date().getFullYear()} COPYRIGHT AWPLODER</p>
             </div>
         )
     }
