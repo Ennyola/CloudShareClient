@@ -11,15 +11,14 @@ class Header extends Component{
       const username = localStorage.getItem('username')
         return(
             <div className = "header shadow-sm" >
-                    <Link className = "navbar-brand" to = {`/homepage/${username}`}>
-                        <img src={ bookImage } alt="logo-img"/>
-                        <span className="platform">  AWPLODER  </span>
-                    </Link>
-    
-                    <span className="user">
-                        <img src={userIcon} className = "img-fluid"  alt="userIcon"/>
-                        <span id = "username"> {username} </span>
-                    </span>  
+                <Link className = "navbar-brand" to = {`/homepage/${username}`}>
+                    <img src={ bookImage } alt="logo-img"/>
+                    <span className="platform">  AWPLODER  </span>
+                </Link>
+                <span className="user">
+                    <img src={userIcon} className = "img-fluid"  alt="userIcon"/>
+                    <span id = "username"> {username} </span>
+                </span>  
             </div>
         )
     }

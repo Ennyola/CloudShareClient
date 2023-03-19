@@ -17,9 +17,7 @@ import uploadImage from '../public/images/upload.png'
 
 
 const DisplayAudiosPage = (props) => {
-
     const user = localStorage.getItem('username')
-
     const {loading : queryLoading, data, error:queryError} = useQuery(getAudioQuery, {
         variables : {username : user}, client
     })
@@ -35,8 +33,7 @@ const DisplayAudiosPage = (props) => {
     // onChange function for upload mutation
     function onChange({    target: {   validity,files: [file],},}) {
         if (validity.valid){
-            const { type  } = file            
-           
+            const { type  } = file              
             uploadAudio({ 
                 variables: { file, username: user },
                 refetchQueries:[{ 
@@ -61,57 +58,50 @@ const DisplayAudiosPage = (props) => {
             })
         } 
      }
+    const onClick=(url)=>{
+        if(window.confirm('Are you sure you want to delete this file')){
+        deleteMutation({
+            variables:{url},
+            refetchQueries : [{
+                query : getAudioQuery,
+                variables : {username: user}
+            }],
+        })
+    }
+    }
+    const download=(url, id)=>{
+        const arr = url.split("upload/");
+        const flag_attachment = 'fl_attachment/';
+        const newUrl = arr.join(`upload/${flag_attachment}`)
+        saveAs(newUrl, id)
 
-     
-        const onClick=(url)=>{
-            if(window.confirm('Are you sure you want to delete this file')){
-            deleteMutation({
-                variables:{url},
-                refetchQueries : [{
-                    query : getAudioQuery,
-                    variables : {username: user}
-                }],
-            })
-        }
-        }
-        const download=(url, id)=>{
-            const arr = url.split("upload/");
-            const flag_attachment = 'fl_attachment/';
-            const newUrl = arr.join(`upload/${flag_attachment}`)
-            saveAs(newUrl, id)
-
-        }
-     
-
+    }
     
-        if (queryLoading) return (<div className = "load-position"> <Loader type="TailSpin" color="#3C4A93" height={80} width={80} /></div> )
-        if (queryError) return (<div className = "fetch-error">  Error :(  ...There seems to be an error getting your Files. Please reload </div>)
+    if (queryLoading) return (<div className = "load-position"> <Loader type="TailSpin" color="#3C4A93" height={80} width={80} /></div> )
+    if (queryError) return (<div className = "fetch-error">  Error :(  ...There seems to be an error getting your Files. Please reload </div>)
 
     const { queryMusic} = data
-
             const sharePopover = (url)=>{
                 return(  
                         <MDBPopover
-                            placement = "left"
-                            popover
-                            clickable
-                            domElement
-                            id="popper2"
-                            >
-                                <p>Share</p>
-                                <div className = "share"   >
-                                    <WhatsappShareButton url = {url}>
-                                        <WhatsappIcon size={28} round={true} className = "share-icons"/>
-                                    </WhatsappShareButton>
-                                    <TwitterShareButton url = {url} title= {"Check out this link"} via={"Awploder"}>
-                                        <TwitterIcon size={28} round={true} className = "share-icons"/>
-                                    </TwitterShareButton>
-                                </div>
-                        </MDBPopover>
-                        
+                        placement="left"
+                        popover
+                        clickable
+                        domElement
+                        id="popper2"
+                        >
+                            <p>Share</p>
+                            <div className = "share"   >
+                                <WhatsappShareButton url = {url}>
+                                    <WhatsappIcon size={28} round={true} className = "share-icons"/>
+                                </WhatsappShareButton>
+                                <TwitterShareButton url = {url} title= {"Check out this link"} via={"Awploder"}>
+                                    <TwitterIcon size={28} round={true} className = "share-icons"/>
+                                </TwitterShareButton>
+                            </div>
+                        </MDBPopover>   
                     )
         }
-
         const optionPopover=(url, id)=>{
         return(
                 <MDBPopover
@@ -130,7 +120,6 @@ const DisplayAudiosPage = (props) => {
                         <p onClick ={()=> {onClick(url)}}>Delete</p>
                     
                     </div>
-
                 </MDBPopover>
         )
 
@@ -173,8 +162,6 @@ const DisplayAudiosPage = (props) => {
 
             return uploadMutationLoading ?  loader : inputFile 
         }
-
-
     return(
             <div className = "container">
                 {showLoaderOrButtonInput()}

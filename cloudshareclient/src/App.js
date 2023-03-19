@@ -7,9 +7,6 @@ import { createHttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { setContext } from 'apollo-link-context'
 
-
-
-
 import LoginForm from './components/LoginForm'
 import SignupForm from './components/SignupForm'
 import Homepage from './components/Homepage'
@@ -47,10 +44,8 @@ const client = new ApolloClient({
 function App() {
   return (
     
-    <ApolloProvider client = { client }>
-      
+    <ApolloProvider client={client}>
       <BrowserRouter>
-         
           <Switch>
             <Route path = "/login"   component = {LoginForm} />
             <Route path = "/signup"   component = {SignupForm} />
@@ -61,12 +56,7 @@ function App() {
             <Route path = "/:username"   component = {requireAuth(Homepage)} />
             <Route path = "/"  component = {LandingPage}/> 
           </Switch>
-          
-        
-          
       </BrowserRouter>
-
-      
     </ApolloProvider>
   );
 }

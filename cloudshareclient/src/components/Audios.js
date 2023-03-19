@@ -9,14 +9,12 @@ import Footer from './Footer'
 class Audios extends Component{
     render(){
         return(
-            
             <div id="outer-container" > 
-                <Sidebar pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" } audiosPage = {true}/>
-                
+                <Sidebar pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" } audiosPage = {true}/>   
                 <div id = "page-wrap">
                     <Header/>
                     <div className = "upload-body ">
-                            <DisplaAudios/>  
+                        <DisplaAudios/>  
                     </div>
                     <Footer/>
                 </div>

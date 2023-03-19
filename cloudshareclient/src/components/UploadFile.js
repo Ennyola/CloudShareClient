@@ -19,7 +19,6 @@ const UploadFile =(props)=> {
                 client
             })
             const [image, setImage] = useState(null)
-
             function onChange({    target: {   validity,files: [file],},}) {
                 if (validity.valid){
                     setImage(file)
@@ -37,33 +36,22 @@ const UploadFile =(props)=> {
                 })
              }
 
-            
-            
-        
-                return(
+            return(
 
-                    <div class="upload">
-                        <form onSubmit = {onSubmit}>
-                            <label htmlFor="upload-file"> 
-                                <img src={uploadImage} alt="upload-image"/><br/>
-                                <span> Click to upload a File </span>
-                            </label>
-                            
-                            <input
-                            onChange = {onChange}
-                            type="file"  id="upload-file" required/><br/>
-                            <button type = "submit"> Submit </button>
-                        </form>
-                        
-                    </div>
-                )
-        
-            
+                <div class="upload">
+                    <form onSubmit = {onSubmit}>
+                        <label htmlFor="upload-file"> 
+                            <img src={uploadImage} alt="upload-image"/><br/>
+                            <span> Click to upload a File </span>
+                        </label>
+                        <input
+                        onChange = {onChange}
+                        type="file"  id="upload-file" required/><br/>
+                        <button type = "submit"> Submit </button>
+                    </form>
+                </div>
+            )   
          }
-        
-
-
-
 
 const link = createUploadLink({
     uri: 'http://127.0.0.1:4000/graphiql/'

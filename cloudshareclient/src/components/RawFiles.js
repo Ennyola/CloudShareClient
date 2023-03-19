@@ -12,7 +12,6 @@ class RawFiles extends Component{
             
             <div id="outer-container" > 
                 <Sidebar pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" } documentsPage = {true} />
-                
                 <div id = "page-wrap">
                     <Header/>
                     <div className = "upload-body ">

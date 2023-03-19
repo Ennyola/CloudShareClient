@@ -14,7 +14,6 @@ class Videos extends Component{
             
             <div id="outer-container" > 
                 <Sidebar pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" } videosPage={true}/>
-                
                 <div id = "page-wrap">
                     <Header/>
                     <div className = "upload-body ">

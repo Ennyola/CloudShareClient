@@ -36,24 +36,23 @@ class Sidebar extends Component{
       const username = localStorage.getItem("username")
         return(
           <Menu  {...this.props}>
-          <div className = "message">
-           <span className = "hello"> Hello </span>  {username}!
-          </div>
-          <Link  to ={{ pathname: `/${username}/images`}}  className="menu-item" >
-           {this.colouredImage()}
-          </Link>
-          <Link to = {{ pathname: `/${username}/videos`}}  className="menu-item" >
-            {this.colouredVideo()}
-          </Link>
-          <Link to ={{ pathname: `/${username}/audios`}}  className="menu-item" >
-           {this.colouredAudio()}
-          </Link>
-          <Link to ={{ pathname: `/${username}/documents`}} className="menu-item"> 
-           {this.colouredDocument()}
-          </Link>
-
-          <button onClick = {this.onLogoutClick.bind(this)} className = "btn btn-danger" id = "logout">Logout</button>
-      </Menu>
+            <div className = "message">
+              <span className = "hello"> Hello </span>  {username}!
+            </div>
+            <Link  to ={{ pathname: `/${username}/images`}}  className="menu-item" >
+              {this.colouredImage()}
+            </Link>
+            <Link to = {{ pathname: `/${username}/videos`}}  className="menu-item" >
+              {this.colouredVideo()}
+            </Link>
+            <Link to ={{ pathname: `/${username}/audios`}}  className="menu-item" >
+              {this.colouredAudio()}
+            </Link>
+            <Link to ={{ pathname: `/${username}/documents`}} className="menu-item"> 
+              {this.colouredDocument()}
+            </Link>
+            <button onClick = {this.onLogoutClick.bind(this)} className = "btn btn-danger" id = "logout">Logout</button>
+          </Menu>
         )
     }
 }

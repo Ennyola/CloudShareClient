@@ -8,20 +8,20 @@ class PageLinks extends Component{
         return(
             <div className="navigation">
                     <ul className="nav">
-                        <li className="nav-item ">
-                            {/* <Link className="nav-link active " to = "/homepage/:username/">All Files</Link> */}
+                        <li className="nav-item">
+                            {/* <Link className="nav-link active" to="/homepage/:username/">All Files</Link> */}
                         </li>
-                        <li className="nav-item ">
-                            <Link className="nav-link " to ={{ pathname: `/homepage/${username}/audios`}}>Audio</Link>
+                        <li className="nav-item">
+                            <Link className="nav-link" to={{ pathname:`/homepage/${username}/audios`}}>Audio</Link>
                         </li>
-                        <li className="nav-item ">
-                            <Link className="nav-link " to ={{ pathname: `/homepage/${username}/documents`}}>Documents</Link>
+                        <li className="nav-item">
+                            <Link className="nav-link" to={{ pathname:`/homepage/${username}/documents`}}>Documents</Link>
                         </li>
-                        <li className="nav-item ">
-                            <Link className="nav-link " to ={{ pathname: `/homepage/${username}/images`}}>Images</Link>
+                        <li className="nav-item">
+                            <Link className="nav-link" to={{ pathname:`/homepage/${username}/images`}}>Images</Link>
                         </li>
-                        <li className="nav-item ">
-                            <Link className="nav-link " to = {{ pathname: `/homepage/${username}/videos`}}> Videos </Link>
+                        <li className="nav-item">
+                            <Link className="nav-link" to= {{ pathname:`/homepage/${username}/videos`}}> Videos </Link>
                         </li>
                     </ul>
                 </div>
